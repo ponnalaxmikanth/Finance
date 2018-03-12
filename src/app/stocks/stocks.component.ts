@@ -7,8 +7,8 @@ import {TableModule} from 'primeng/table';
   styleUrls: ['./stocks.component.css']
 })
 export class StocksComponent implements OnInit {
-  cols : any;
-  stocks : any;
+  cols: any;
+  stocks: any;
   constructor() { }
 
   ngOnInit() {
@@ -19,13 +19,12 @@ export class StocksComponent implements OnInit {
       { field: 'Stockprice', header: 'Price' }
     ];
 
-    this.stocks = 
+    this.stocks =
       [
-        { StockID: "MSFT", Purchasedatetime: "03/01/2018", No_of_Stocks: 1,  Stockprice: 93.41 }
-      , { StockID: "MSFT", Purchasedatetime: "03/01/2018", No_of_Stocks: 1,  Stockprice: 93.41 }
-      , { StockID: "MSFT", Purchasedatetime: "03/01/2018", No_of_Stocks: 1,  Stockprice: 93.41 }
-      ]
-    
+        { StockID: 'MSFT', Purchasedatetime: '03/01/2018', No_of_Stocks: 1,  Stockprice: 93.41 }
+      , { StockID: 'MSFT', Purchasedatetime: '03/01/2018', No_of_Stocks: 1,  Stockprice: 93.41 }
+      , { StockID: 'MSFT', Purchasedatetime: '03/01/2018', No_of_Stocks: 1,  Stockprice: 93.41 }
+      ];
   }
 
 }
