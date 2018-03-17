@@ -9,7 +9,7 @@ import {MenubarModule} from 'primeng/menubar';
 import { MutualFundsComponent } from './mutual-funds/mutual-funds.component';
 import { InsuranceComponent } from './insurance/insurance.component';
 import { AccountsComponent } from './accounts/accounts.component';
-
+import { StocksService } from '../app/services/stocks.service';
 
 const appRoutes: Routes = [
   { path: 'stocks', component: StocksComponent },
@@ -32,7 +32,7 @@ const appRoutes: Routes = [
     , MenubarModule
     , RouterModule.forRoot(appRoutes,{ enableTracing: true })
   ],
-  providers: [],
+  providers: [StocksService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
