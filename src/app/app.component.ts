@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import {MenuItem} from 'primeng/api';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,21 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+
+  menuItems: MenuItem[];
+
+  ngOnInit() {
+    this.menuItems = [
+        { label: 'Stocks'//icon: 'fa-plus',
+        },
+        {
+            label: 'Mutual Funds'// icon: 'fa-edit',
+        },
+        { label: 'Accounts' },
+        { label: 'Insurance' }
+    ];
 }
+
+}
+
+
