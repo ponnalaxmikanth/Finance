@@ -13,13 +13,13 @@ export class AppComponent {
 
   ngOnInit() {
     this.menuItems = [
-        { label: 'Stocks'//icon: 'fa-plus',
+        { label: 'Stocks', routerLink: ['/stocks']//icon: 'fa-plus',
         },
         {
-            label: 'Mutual Funds'// icon: 'fa-edit',
+            label: 'Mutual Funds', routerLink: ['/mfs']// icon: 'fa-edit',
         },
-        { label: 'Accounts' },
-        { label: 'Insurance' }
+        { label: 'Accounts', routerLink: ['/accounts'] },
+        { label: 'Insurance', routerLink: ['/insurances'] }
     ];
 }
 
