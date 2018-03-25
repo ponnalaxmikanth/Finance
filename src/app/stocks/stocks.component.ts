@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {TableModule} from 'primeng/table';
+import { TableModule } from 'primeng/table';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import { Istocks } from '../../interface/stocks';
 import { StocksService } from '../services/stocks.service';
 
 @Component({
@@ -8,29 +10,31 @@ import { StocksService } from '../services/stocks.service';
   templateUrl: './stocks.component.html',
   styleUrls: ['./stocks.component.css']
 })
+
 export class StocksComponent implements OnInit {
   cols: any;
-  stocks: any;
+  stocks: Istocks[];
+
   constructor(private stocksService: StocksService) { }
 
   ngOnInit() {
     this.cols = [
-      { field: 'StockID', header: 'Stock Code' },
-      {field: 'Purchasedatetime', header: 'Purchase Date' },
-      { field: 'No_of_Stocks', header: 'Quantity' },
-      { field: 'Stockprice', header: 'Price' }
+      { field: 'StocksId', header: 'Stock Code' },
+      {field: 'PurchaseDate', header: 'Purchase Date' },
+      { field: 'NumbersofStocks', header: 'Quantity' },
+      { field: 'StocksPrice', header: 'Price' }
     ];
 
     this.getStocks();
-
-    // this.stocks =
-    //   [
-    //     { StockID: 'MSFT', Purchasedatetime: '03/01/2018', No_of_Stocks: 1,  Stockprice: 93.41 }
-    //   , { StockID: 'MSFT', Purchasedatetime: '03/01/2018', No_of_Stocks: 1,  Stockprice: 93.41 }
-    //   , { StockID: 'MSFT', Purchasedatetime: '03/01/2018', No_of_Stocks: 1,  Stockprice: 93.41 }
-    //   ];
   }
 
-  getStocks(): void { this.stocks = this.stocksService.getStocks(); }
+  getStocks(): void {
+    try {
+      this.stocksService.getStocks().subscribe(s => {
+        this.stocks = s;
+      });
+    } catch (e) { console.log('getStocks exception:', e);
+    }
+  }
 
 }

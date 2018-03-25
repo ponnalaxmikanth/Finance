@@ -10,6 +10,7 @@ import { MutualFundsComponent } from './mutual-funds/mutual-funds.component';
 import { InsuranceComponent } from './insurance/insurance.component';
 import { AccountsComponent } from './accounts/accounts.component';
 import { StocksService } from '../app/services/stocks.service';
+import { HttpClientModule } from '@angular/common/http';
 
 const appRoutes: Routes = [
   { path: 'stocks', component: StocksComponent },
@@ -24,10 +25,12 @@ const appRoutes: Routes = [
     StocksComponent,
     MutualFundsComponent,
     InsuranceComponent,
-    AccountsComponent
+    AccountsComponent,
+    
   ],
   imports: [
     BrowserModule
+    , HttpClientModule
     , TableModule
     , MenubarModule
     , RouterModule.forRoot(appRoutes,{ enableTracing: true })

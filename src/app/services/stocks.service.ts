@@ -1,16 +1,20 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
+import { environment } from '../../environments/environment';
+import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs/Observable';
+import { Istocks } from '../../interface/stocks';
 
 @Injectable()
 export class StocksService {
-
-  constructor() { }
+  data: any;
+  baseUrl: string;
+  constructor(private httpClient: HttpClient) {
+    this.baseUrl = environment.apiUrl;
+   }
 
   public getStocks() {
-    return [
-          { StockID: 'MSFT', Purchasedatetime: '03/01/2018', No_of_Stocks: 1,  Stockprice: 93.41 }
-        , { StockID: 'MSFT', Purchasedatetime: '03/01/2018', No_of_Stocks: 1,  Stockprice: 93.41 }
-        , { StockID: 'MSFT', Purchasedatetime: '03/01/2018', No_of_Stocks: 1,  Stockprice: 93.41 }
-        ];
+      return this.httpClient.get<Istocks[]>(this.baseUrl + '/api/Stocks/GetStocks');
   }
 
 }
