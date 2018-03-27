@@ -1,3 +1,13 @@
+
+<div>     
+       <label for="fromdate">FromDate</label>
+      <!-- <input type="date" id="myDate" > -->
+       <p-calendar [(ngModel)]="fromdate" dateFormat="mm/dd/yy" > </p-calendar>
+        <label for="todate">ToDate</label>
+        <p-calendar [(ngModel)]="todate" dateFormat="mm/dd/yy"> </p-calendar>
+        <!-- <input type="date" id="myDate" value="2018-03-27">            -->
+        <button onclick="submit">Show</button>
+ </div>   
 <p-table [columns]="cols" [value]="stocks">
   <ng-template pTemplate="header" let-columns>
       <tr>

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { StocksService } from '../services/stocks.service';
+import {CalendarModule} from 'primeng/calendar';
 
 
 @NgModule({
@@ -10,6 +11,7 @@ import { StocksService } from '../services/stocks.service';
     CommonModule,
     BrowserModule,
     HttpClientModule,
+    CalendarModule,
   ],
   declarations: [],
   providers: [ StocksService ]

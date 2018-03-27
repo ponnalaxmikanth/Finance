@@ -13,7 +13,7 @@ export class StocksService {
     this.baseUrl = environment.apiUrl;
    }
 
-  public getStocks() {
+  public getStocks(fromdate:Date,todate:Date) {
       return this.httpClient.get<Istocks[]>(this.baseUrl + '/api/Stocks/GetStocks');
   }
 

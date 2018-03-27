@@ -11,6 +11,10 @@ import { InsuranceComponent } from './insurance/insurance.component';
 import { AccountsComponent } from './accounts/accounts.component';
 import { StocksService } from '../app/services/stocks.service';
 import { HttpClientModule } from '@angular/common/http';
+import {CalendarModule} from 'primeng/calendar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 const appRoutes: Routes = [
   { path: 'stocks', component: StocksComponent },
@@ -34,6 +38,10 @@ const appRoutes: Routes = [
     , TableModule
     , MenubarModule
     , RouterModule.forRoot(appRoutes,{ enableTracing: true })
+    ,CalendarModule
+    ,BrowserAnimationsModule
+    ,FormsModule
+    ,ReactiveFormsModule
   ],
   providers: [StocksService],
   bootstrap: [AppComponent]
