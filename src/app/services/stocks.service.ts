@@ -14,7 +14,7 @@ export class StocksService {
    }
 
   public getStocks() {
-      return this.httpClient.get<Istocks[]>(this.baseUrl + '/api/Stocks/GetStocks');
+      return this.httpClient.post<Istocks[]>(this.baseUrl + '/api/Stocks');
   }
 
 }
