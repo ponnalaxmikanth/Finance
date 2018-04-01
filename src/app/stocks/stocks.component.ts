@@ -30,10 +30,8 @@ export class StocksComponent implements OnInit {
     d.setDate(d.getDate() -365);
     this.fromdate=d;
     this.todate=new Date();
-
     this.getStocks();
   }
-
   getStocks(): void {
     try {
       this.stocksService.getStocks(this.fromdate,this.todate).subscribe(s => {

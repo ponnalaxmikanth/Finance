@@ -5,6 +5,12 @@ import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { Istocks } from '../../interface/stocks';
 
+ const httpOptions = {
+   headers :new HttpHeaders({
+     'Content-Type':'application/json'
+   })
+ };
+
 @Injectable()
 export class StocksService {
   data: any;
@@ -13,8 +19,13 @@ export class StocksService {
     this.baseUrl = environment.apiUrl;
    }
 
-  public getStocks(fromdate:Date,todate:Date) {
-      return this.httpClient.get<Istocks[]>(this.baseUrl + '/api/Stocks/GetStocks');
+  public getStocks(fromdt:Date,todt:Date)
+   {
+     var request ={
+      fromdate:fromdt,
+      todate:todt
+     };
+      return this.httpClient.post<Istocks[]>(this.baseUrl + '/api/Stocks/GetStocks', JSON.stringify(request), httpOptions);
   }
 
 }
