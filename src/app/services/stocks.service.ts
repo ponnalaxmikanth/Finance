@@ -25,7 +25,7 @@ export class StocksService {
       fromdate:fromdt,
       todate:todt
      };
-      return this.httpClient.post<Istocks[]>(this.baseUrl + '/api/Stocks/GetStocks', JSON.stringify(request), httpOptions);
+      return this.httpClient.post<Istocks[]>(this.baseUrl + '/api/Stocks', JSON.stringify(request), httpOptions);
   }
 
 }
