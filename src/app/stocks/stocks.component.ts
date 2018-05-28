@@ -32,12 +32,27 @@ export class StocksComponent implements OnInit {
     this.todate=new Date();
     this.getStocks();
   }
+
+  submit() {
+    this.getStocks();
+  }
+
   getStocks(): void {
     try {
-      this.stocksService.getStocks(this.fromdate,this.todate).subscribe(s => {
+      console.log('StocksComponent -- getStocks');
+      this.stocksService.getStocks(this.fromdate, this.todate).subscribe(s => {
         this.stocks = s;
-      });
-    } catch (e) { console.log('getStocks exception:', e);
+        console.log('StocksComponent -- getStocks', s);
+      },
+      error => {
+        //console.log(error.json().error);
+        console.error('StocksComponent -- getStocks', error);
+        //return false;
+      }
+     );
+    }
+    catch (e) {
+      console.log('getStocks exception:', e);
     }
   }
 

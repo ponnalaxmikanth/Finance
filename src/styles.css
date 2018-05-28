@@ -1,1 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+
+styles: [ "styles.css",
+"../node_modules/font-awesome/css/font-awesome.min.css",
+"../node_modules/primeng/resources/primeng.min.css",
+"../node_modules/primeng/resources/themes/darkness/theme.css"
+]
+
+body {
+  font-size: 12px !important;
+  font-family: "Merriweather", "Helvetica Neue", Arial, sans-serif !important;
+}
