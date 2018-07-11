@@ -20,15 +20,9 @@ export class MutualFundsComponent implements OnInit {
 
   private addTransaction: boolean = false;
 
-  private fundHouses: any;
-  private fundTypes: any;
-  private fundCategory: any;
-  private fundOptions: any;
-
   ngOnInit() {
-    console.log('MutualFundsComponent -- ngOnInit');
     this._mutualfundsService.addMFTransactions.subscribe((val: boolean) => {
-      this.addTransaction = true;
+      this.addTransaction = val;
     });
   }
 
@@ -36,8 +30,7 @@ export class MutualFundsComponent implements OnInit {
     this.addTransaction = false;
 
     this._mutualfundsService.getFundHouses().subscribe(s => {
-      this.fundHouses = s;
-      console.log('MutualFundsComponent -- getFundHouses', this.fundHouses );
+      this._mutualfundsService.fundHouses = s;
     },
       error => {
         console.error('MutualFundsComponent -- getFundHouses', error);
@@ -45,8 +38,7 @@ export class MutualFundsComponent implements OnInit {
     );
 
     this._mutualfundsService.getFundTypes().subscribe(s => {
-      this.fundTypes = s;
-      console.log('MutualFundsComponent -- getFundTypes', this.fundTypes);
+      this._mutualfundsService.fundTypes = s;
     },
       error => {
         console.error('MutualFundsComponent -- getFundTypes', error);
@@ -54,8 +46,7 @@ export class MutualFundsComponent implements OnInit {
     );
 
     this._mutualfundsService.getFundCategory().subscribe(s => {
-      this.fundCategory = s;
-      console.log('MutualFundsComponent -- getFundCategory', this.fundCategory);
+      this._mutualfundsService.fundCategory = s;
     },
       error => {
         console.error('MutualFundsComponent -- getFundCategory', error);
@@ -63,11 +54,42 @@ export class MutualFundsComponent implements OnInit {
     );
 
     this._mutualfundsService.getFundOptions().subscribe(s => {
-      this.fundOptions = s;
-      console.log('MutualFundsComponent -- getFundOptions', this.fundOptions);
+      this._mutualfundsService.fundOptions = s;
     },
       error => {
         console.error('MutualFundsComponent -- getFundOptions', error);
+      }
+    );
+
+    this._mutualfundsService.getFunds().subscribe(s => {
+      this._mutualfundsService.funds = s;
+    },
+      error => {
+        console.error('MutualFundsComponent -- getFunds', error);
+      }
+    );
+
+    this._mutualfundsService.getMyFunds().subscribe(s => {
+      this._mutualfundsService.myFunds = s;
+    },
+      error => {
+        console.error('MutualFundsComponent -- getMyFunds', error);
+      }
+    );
+
+    this._mutualfundsService.getFolios().subscribe(s => {
+      this._mutualfundsService.folios = s;
+    },
+      error => {
+        console.error('MutualFundsComponent -- getFolios', error);
+      }
+    );
+
+    this._mutualfundsService.getPortFolios().subscribe(s => {
+      this._mutualfundsService.portfolios = s;
+    },
+      error => {
+        console.error('MutualFundsComponent -- getPortFolios', error);
       }
     );
     

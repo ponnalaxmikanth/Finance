@@ -16,6 +16,14 @@ export class MutualfundsService {
 
   public addMFTransactions: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+  public fundHouses: any;
+  public fundTypes: any;
+  public fundCategory: any;
+  public fundOptions: any;
+  public funds: any;
+  public myFunds: any;
+  public folios: any;
+  public portfolios: any;
 
   getFundHouses(): Observable<any> {
     return this.httpClient.get(this.baseUrl + 'api/MutualFunds/GetFundHouses', httpOptions);
@@ -31,6 +39,26 @@ export class MutualfundsService {
 
   getFundOptions(): Observable<any> {
     return this.httpClient.get(this.baseUrl + 'api/MutualFunds/GetFundOptions', httpOptions);
+  }
+
+  getFunds(): Observable<any> {
+    return this.httpClient.get(this.baseUrl + 'api/MutualFunds/GetFunds', httpOptions);
+  }
+
+  getMyFunds(): Observable<any> {
+    return this.httpClient.get(this.baseUrl + 'api/MutualFunds/GetMyFunds', httpOptions);
+  }
+
+  getFolios(): Observable<any> {
+    return this.httpClient.get(this.baseUrl + 'api/MutualFunds/GetFolios', httpOptions);
+  }
+
+  getPortFolios(): Observable<any> {
+    return this.httpClient.get(this.baseUrl + 'api/MutualFunds/GetPortfolios', httpOptions);
+  }
+
+  addPurchase(request): Observable<any> {
+    return this.httpClient.post(this.baseUrl + 'api/MutualFunds/AddTransaction', request, httpOptions);
   }
 
   handleError(error: HttpErrorResponse) {

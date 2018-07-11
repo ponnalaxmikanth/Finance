@@ -1,9 +1,110 @@
-<div class="">
-  <div class="">
-    <span class="">Fund House</span>
-    <select class="">
-      <option>SBI</option>
-      <option>ICICI</option>
-    </select>
+
+<h1 style="font-weight:normal; text-align: center;">Add Transaction</h1>
+
+<div class="elements">
+  <div class="row element">
+    <div class="col-lg-6">
+      <span class="label">Portfolio</span>
+      <p-dropdown [options]="portfolios" [(ngModel)]="selectedportFolio" optionLabel="name" placeholder="Portfolios" autoWidth="false" [style]="{'width':'100%'}"
+                  [showClear]="true" (onChange)="onChangePortfolios()">
+      </p-dropdown>
+    </div>
+
+    <div class="col-lg-6">
+      <span class="label">Fund House</span>
+      <p-dropdown class="" [options]="fundDetails.fundHouses" [(ngModel)]="fundDetails.selectedHouse" optionLabel="name" placeholder="Fund House"
+                  [disabled]="disableControls.fundHouse" autoWidth="false" [style]="{'width':'100%'}" [showClear]="true" filter="true" (onChange)="fundHouseSelected()">
+      </p-dropdown>
+    </div>
   </div>
+
+  <div class="row element">
+    <div class="col-lg-12">
+      <span class="label">Fund</span>
+      <p-dropdown [options]="fundDetails.funds" [(ngModel)]="fundDetails.selectedFund" optionLabel="name" placeholder="Fund"
+                  [disabled]="disableControls.funds" autoWidth="false" [style]="{'width':'100%'}" [showClear]="true" filter="true" (onChange)="onChangeFund()">
+      </p-dropdown>
+    </div>
+
+  </div>
+
+  <div class="row element">
+    <div class="col-lg-12">
+      <span class="label">Growth Fund</span>
+      <p-dropdown [options]="fundDetails.funds" [(ngModel)]="fundDetails.growthSelectedFund" optionLabel="name" placeholder="Growth Fund"
+                  [disabled]="disableControls.growthFunds" autoWidth="false" [style]="{'width':'100%'}" [showClear]="true" filter="true">
+      </p-dropdown>
+    </div>
+  </div>
+
+  <div class="row element">
+    <div class="col-lg-6">
+      <span class="label">Folio</span>
+      <p-dropdown [options]="folios" [(ngModel)]="selectedFolios" optionLabel="name" placeholder="Folio" autoWidth="false" [style]="{'width':'100%'}"
+                  [showClear]="true" filter="true" [disabled]="disableControls.folios">
+      </p-dropdown>
+    </div>
+
+    <div class="col-lg-6">
+      <span class="label">Fund Types</span>
+      <p-dropdown [options]="fundDetails.fundTypes" [(ngModel)]="fundDetails.selectedFundType" optionLabel="name" placeholder="Fund Type"
+                  [disabled]="disableControls.fundtypes" autoWidth="false" [style]="{'width':'100%'}" [showClear]="true" (onChange)="fundTypeSelected()">
+      </p-dropdown>
+    </div>
+  </div>
+
+  <div class="row element">
+    <div class="col-lg-6">
+      <span class="label">Fund Category</span>
+      <p-dropdown [options]="fundDetails.fundCategory" [(ngModel)]="fundDetails.selectedFundCategory" optionLabel="name" placeholder="Fund Category"
+                  [disabled]="disableControls.fundcategory" autoWidth="false" [style]="{'width':'100%'}" [showClear]="true" (onChange)="fundTypeCategory()">
+      </p-dropdown>
+    </div>
+
+    <div class="col-lg-6">
+      <span class="label">Fund Options</span>
+      <p-dropdown [options]="fundDetails.fundOptions" [(ngModel)]="fundDetails.selectedFundOptions" optionLabel="name" placeholder="Fund Option"
+                  [disabled]="disableControls.fundoptions" autoWidth="false" [style]="{'width':'100%'}" [showClear]="true" (onChange)="fundTypeOptions()">
+      </p-dropdown>
+    </div>
+  </div>
+
+  <div class="row element">
+    <div class="col-lg-5">
+      <span class="label">Date</span>
+      <p-calendar [(ngModel)]="purchasedate"></p-calendar>
+    </div>
+  </div>
+
+  <div class="row element">
+    <div class="col-lg-3">
+      <div class="ui-inputgroup">
+        <span class="ui-inputgroup-addon">₹</span>
+        <span class="ui-float-label">
+          <input id="float-input" type="text" size="10" pInputText [(ngModel)]="amount">
+          <label for="float-input">Amount</label>
+        </span>
+      </div>
+    </div>
+    <div class="col-lg-3">
+      <span class="ui-float-label">
+        <input id="float-input" type="text" size="10" pInputText [(ngModel)]="units">
+        <label for="float-input">Units</label>
+      </span>
+    </div>
+    <div class="col-lg-3">
+      <span class="ui-float-label">
+        <input id="float-input" type="text" size="10" pInputText [(ngModel)]="nav">
+        <label for="float-input">NAV</label>
+      </span>
+    </div>
+    <div class="col-lg-3">
+      <p-checkbox [(ngModel)]="IsSIP" binary="true" label="SIP"></p-checkbox>
+    </div>
+  </div>
+
+  <div class="row element">
+    <p-button (onClick)="SaveTransaction()" icon="pi pi-check" iconPos="right" label="Save"></p-button>
+  </div>
+
 </div>

@@ -24,7 +24,8 @@ export class AppComponent {
         label: 'Mutual Funds', routerLink: ['/mfs'],
         items: [
           { label: 'Add', icon: 'fa-plus', command: (onclick) => { this.addMFTransaction() } },
-          { label: 'Open', icon: 'fa-download' }
+          { label: 'Redeem', icon: 'fa-minus' },
+          { label: 'Dividend', icon: 'fa-plus' },
         ]
       }, // icon: 'fa-edit',
         { label: 'Accounts', routerLink: ['/accounts'] },

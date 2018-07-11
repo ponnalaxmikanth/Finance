@@ -22,6 +22,10 @@ import { CodeHighlighterModule } from '../../node_modules/primeng/components/cod
 //import { AddtransactionComponent } from './addtransaction/addtransaction.component';
 
 import { SidebarModule } from 'primeng/sidebar';
+import { DropdownModule } from 'primeng/dropdown';
+import { CheckboxModule } from 'primeng/checkbox';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
 
 import { AppComponent } from './app.component';
 import { StocksComponent } from './stocks/stocks.component';
@@ -68,8 +72,13 @@ const appRoutes: Routes = [
     , ContextMenuModule
     , CodeHighlighterModule
     , SidebarModule
+    , DropdownModule
+    , CheckboxModule
+    , InputTextModule
+    , ButtonModule
   ],
   providers: [StocksService, MutualfundsService],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
