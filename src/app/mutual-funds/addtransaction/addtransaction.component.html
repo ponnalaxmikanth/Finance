@@ -38,73 +38,78 @@
   </div>
 
   <div class="row element">
-    <div class="col-lg-6">
+    <div class="col-lg-3">
       <span class="label">Folio</span>
       <p-dropdown [options]="folios" [(ngModel)]="selectedFolios" optionLabel="name" placeholder="Folio" autoWidth="false" [style]="{'width':'100%'}"
                   [showClear]="true" filter="true" [disabled]="disableControls.folios">
       </p-dropdown>
     </div>
-
-    <div class="col-lg-6">
-      <span class="label">Fund Types</span>
-      <p-dropdown [options]="fundDetails.fundTypes" [(ngModel)]="fundDetails.selectedFundType" optionLabel="name" placeholder="Fund Type"
+    <div class="col-lg-3">
+      <span class="label">Type</span>
+      <p-dropdown [options]="fundDetails.fundTypes" [(ngModel)]="fundDetails.selectedFundType" optionLabel="name" placeholder="Type"
                   [disabled]="disableControls.fundtypes" autoWidth="false" [style]="{'width':'100%'}" [showClear]="true" (onChange)="fundTypeSelected()">
       </p-dropdown>
     </div>
-  </div>
-
-  <div class="row element">
-    <div class="col-lg-6">
-      <span class="label">Fund Category</span>
-      <p-dropdown [options]="fundDetails.fundCategory" [(ngModel)]="fundDetails.selectedFundCategory" optionLabel="name" placeholder="Fund Category"
+    <div class="col-lg-3">
+      <span class="label">Category</span>
+      <p-dropdown [options]="fundDetails.fundCategory" [(ngModel)]="fundDetails.selectedFundCategory" optionLabel="name" placeholder="Category"
                   [disabled]="disableControls.fundcategory" autoWidth="false" [style]="{'width':'100%'}" [showClear]="true" (onChange)="fundTypeCategory()">
       </p-dropdown>
     </div>
-
-    <div class="col-lg-6">
-      <span class="label">Fund Options</span>
-      <p-dropdown [options]="fundDetails.fundOptions" [(ngModel)]="fundDetails.selectedFundOptions" optionLabel="name" placeholder="Fund Option"
+    <div class="col-lg-3">
+      <span class="label">Option</span>
+      <p-dropdown [options]="fundDetails.fundOptions" [(ngModel)]="fundDetails.selectedFundOptions" optionLabel="name" placeholder="Option"
                   [disabled]="disableControls.fundoptions" autoWidth="false" [style]="{'width':'100%'}" [showClear]="true" (onChange)="fundTypeOptions()">
       </p-dropdown>
     </div>
   </div>
 
   <div class="row element">
-    <div class="col-lg-5">
-      <span class="label">Date</span>
-      <p-calendar [(ngModel)]="purchasedate"></p-calendar>
-    </div>
+    
   </div>
 
-  <div class="row element">
+  <div class="row element inputs">
+    <div class="col-lg-2">
+      <span class="label">Date</span>
+      <p-calendar [(ngModel)]="purchasedate" [maxDate]="maxDate" (onSelect)="getFundNav()" [inputStyle]="{'width':'100px'}"></p-calendar>
+    </div>
     <div class="col-lg-3">
-      <div class="ui-inputgroup">
+      <span class="label">&nbsp;</span>
+      <div class="ui-inputgroup" style="width: 100%;">
         <span class="ui-inputgroup-addon">₹</span>
-        <span class="ui-float-label">
-          <input id="float-input" type="text" size="10" pInputText [(ngModel)]="amount">
+        <span class="ui-float-label" style="width: 100%;">
+          <input id="float-input" type="text" size="10" pInputText [(ngModel)]="amount" style="width: 100%;" maxlength="7">
           <label for="float-input">Amount</label>
         </span>
       </div>
     </div>
     <div class="col-lg-3">
+      <span class="label">&nbsp;</span>
       <span class="ui-float-label">
         <input id="float-input" type="text" size="10" pInputText [(ngModel)]="units">
         <label for="float-input">Units</label>
       </span>
     </div>
+
     <div class="col-lg-3">
+      <span class="label">&nbsp;</span>
       <span class="ui-float-label">
         <input id="float-input" type="text" size="10" pInputText [(ngModel)]="nav">
         <label for="float-input">NAV</label>
       </span>
     </div>
-    <div class="col-lg-3">
-      <p-checkbox [(ngModel)]="IsSIP" binary="true" label="SIP"></p-checkbox>
+
+    <div class="col-lg-1">
+      <span class="label">SIP</span>
+      <p-checkbox [(ngModel)]="IsSIP" binary="true"></p-checkbox>
     </div>
   </div>
 
   <div class="row element">
-    <p-button (onClick)="SaveTransaction()" icon="pi pi-check" iconPos="right" label="Save"></p-button>
+    <div class="col-lg-2">
+      <p-button (onClick)="SaveTransaction()" icon="pi pi-check" iconPos="right" label="Save"></p-button>
+    </div>
+    
   </div>
 
 </div>

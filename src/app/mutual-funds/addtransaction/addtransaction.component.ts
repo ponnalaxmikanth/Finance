@@ -27,16 +27,17 @@ export class AddtransactionComponent implements OnInit {
     growthSelectedFund: {},
   };
   public folios: any[];
-  public selectedFolios: {};
+  public selectedFolios: any;
 
   public portfolios: any[];
-  public selectedportFolio: {};
+  public selectedportFolio: any;
 
   public purchasedate: Date = new Date();
   public IsSIP: boolean = false;
-  public amount: number;
+  public amount: number = 5000;
   public units: number;
   public nav: number;
+  public maxDate: Date = new Date();
 
   public disableControls : any = {
     fundHouse: true,
@@ -99,8 +100,13 @@ export class AddtransactionComponent implements OnInit {
 
     for (let h = 0; h < this._mutualfundsService.folios.length; h++) {
       if (this._mutualfundsService.folios[h].FundHouseId == this.fundDetails.selectedHouse.code
-        && this._mutualfundsService.folios[h].PortfolioId == this.selectedportFolio.code)
+        && this._mutualfundsService.folios[h].PortfolioId == this.selectedportFolio.code) {
         this.folios.push({ name: this._mutualfundsService.folios[h].FolioNumber, code: this._mutualfundsService.folios[h].FolioId });
+
+        if (this._mutualfundsService.folios[h].isDefaultFolio) {
+          this.selectedFolios = { name: this._mutualfundsService.folios[h].FolioNumber, code: this._mutualfundsService.folios[h].FolioId };
+        }
+      }
     }
     this.disableControls.folios = false;
     this.disableControls.fundtypes = false;
@@ -126,6 +132,7 @@ export class AddtransactionComponent implements OnInit {
 
   onChangeFund() {
     console.log('on fund select', this.fundDetails.selectedFund);
+    this.getFundNav();
     let myFunds = this._mutualfundsService.myFunds;
     for (let f = 0; f < myFunds .length; f++) {
       if (myFunds[f].SchemaCode == this.fundDetails.selectedFund.code) {
@@ -141,6 +148,19 @@ export class AddtransactionComponent implements OnInit {
     this.fundDetails.selectedFundCategory = {};
     this.fundDetails.selectedFundOptions = {};
     this.fundDetails.growthSelectedFund = {};
+  }
+
+  getFundNav() {
+    let request = { SchemaCode: this.fundDetails.selectedFund.code, Date: this.purchasedate };
+    this._mutualfundsService.getFundNav(request).subscribe((val: number) => {
+      if (val == -9999999) {
+        this.nav = 0;
+      }
+      else {
+        this.nav = val;
+        this.units = parseFloat((this.amount / val).toFixed(4));
+      }
+    });
   }
 
   onChangePortfolios() {
