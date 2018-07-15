@@ -15,6 +15,8 @@ export class MutualfundsService {
   }
 
   public addMFTransactions: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public redeenUnits: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public addDividend: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   public fundHouses: any;
   public fundTypes: any;
@@ -45,8 +47,8 @@ export class MutualfundsService {
     return this.httpClient.get(this.baseUrl + 'api/MutualFunds/GetFunds', httpOptions);
   }
 
-  getMyFunds(): Observable<any> {
-    return this.httpClient.get(this.baseUrl + 'api/MutualFunds/GetMyFunds', httpOptions);
+  getMyFunds(request): Observable<any> {
+    return this.httpClient.post(this.baseUrl + 'api/MutualFunds/GetMyFunds', request, httpOptions);
   }
 
   getFolios(): Observable<any> {

@@ -19,24 +19,19 @@ export class AppComponent {
 
   ngOnInit() {
     this.menuItems = [
-        { label: 'Stocks', routerLink: ['/stocks'] }, //icon: 'fa-plus',
+        { label: 'Stocks', routerLink: ['/stocks'] },
       {
         label: 'Mutual Funds', routerLink: ['/mfs'],
         items: [
-          { label: 'Add', icon: 'fa-plus', command: (onclick) => { this.addMFTransaction() } },
-          { label: 'Redeem', icon: 'fa-minus' },
-          { label: 'Dividend', icon: 'fa-plus' },
+          { label: 'Add', icon: 'fa-plus', command: (onclick) => { this._mutualfundsService.addMFTransactions.next(true); } },
+          { label: 'Redeem', icon: 'fa-minus', command: (onclick) => { this._mutualfundsService.redeenUnits.next(true); } },
+          { label: 'Dividend', icon: 'fa-plus', command: (onclick) => { this._mutualfundsService.addDividend.next(true); } },
         ]
-      }, // icon: 'fa-edit',
+      },
         { label: 'Accounts', routerLink: ['/accounts'] },
         { label: 'Insurance', routerLink: ['/insurances'] }
     ];
   }
-
-  addMFTransaction() {
-    this._mutualfundsService.addMFTransactions.next(true);
-  }
-
 }
 
 

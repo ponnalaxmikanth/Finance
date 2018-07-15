@@ -19,7 +19,6 @@ import { GrowlModule } from '../../node_modules/primeng/components/growl/growl';
 import { TabViewModule } from '../../node_modules/primeng/components/tabview/tabview';
 import { ContextMenuModule } from '../../node_modules/primeng/components/contextmenu/contextmenu';
 import { CodeHighlighterModule } from '../../node_modules/primeng/components/codehighlighter/codehighlighter';
-//import { AddtransactionComponent } from './addtransaction/addtransaction.component';
 
 import { SidebarModule } from 'primeng/sidebar';
 import { DropdownModule } from 'primeng/dropdown';
@@ -32,10 +31,12 @@ import { StocksComponent } from './stocks/stocks.component';
 import { MutualFundsComponent } from './mutual-funds/mutual-funds.component';
 import { InsuranceComponent } from './insurance/insurance.component';
 import { AccountsComponent } from './accounts/accounts.component';
-import { AddtransactionComponent } from './mutual-funds/addtransaction/addtransaction.component';
 
 import { StocksService } from '../app/services/stocks.service';
 import { MutualfundsService } from '../app/services/mutualfunds/mutualfunds.service';
+import { AddtransactionComponent } from './mutual-funds/addtransaction/addtransaction.component';
+import { RedeemunitsComponent } from './mutual-funds/redeemunits/redeemunits.component';
+import { AdddividendComponent } from './mutual-funds/adddividend/adddividend.component';
 
 
 
@@ -54,6 +55,8 @@ const appRoutes: Routes = [
     InsuranceComponent,
     AccountsComponent,
     AddtransactionComponent,
+    RedeemunitsComponent,
+    AdddividendComponent,
   ],
   imports: [
     BrowserModule

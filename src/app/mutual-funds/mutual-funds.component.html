@@ -1,7 +1,13 @@
 <div class="mutual-funds">
 
-  <p-sidebar [(visible)]="addTransaction" *ngIf="addTransaction" position="right" styleClass="ui-sidebar-md">
+  <p-sidebar [(visible)]="sidebars.addTransaction" *ngIf="sidebars.addTransaction" position="right" styleClass="ui-sidebar-md">
     <app-addtransaction></app-addtransaction>
+  </p-sidebar>
+  <p-sidebar [(visible)]="sidebars.redeemUnits" *ngIf="sidebars.redeemUnits" position="right" styleClass="ui-sidebar-md">
+    <app-redeemunits></app-redeemunits>
+  </p-sidebar>
+  <p-sidebar [(visible)]="sidebars.addDividend" *ngIf="sidebars.addDividend" position="right" styleClass="ui-sidebar-md">
+    <app-adddividend></app-adddividend>
   </p-sidebar>
 
   <!--<div class="" *ngFor="let transaction of transactions">

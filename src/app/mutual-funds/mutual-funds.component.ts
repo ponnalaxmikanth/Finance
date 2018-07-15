@@ -18,16 +18,28 @@ import { MutualfundsService } from '../services/mutualfunds/mutualfunds.service'
 
 export class MutualFundsComponent implements OnInit {
 
-  private addTransaction: boolean = false;
+  public sidebars: any = {
+    addTransaction: false,
+    redeemUnits: false,
+    addDividend: false
+  };
 
   ngOnInit() {
     this._mutualfundsService.addMFTransactions.subscribe((val: boolean) => {
-      this.addTransaction = val;
+      this.sidebars.addTransaction = val;
+    });
+
+    this._mutualfundsService.redeenUnits.subscribe((val: boolean) => {
+      this.sidebars.redeemUnits = val;
+    });
+
+    this._mutualfundsService.addDividend.subscribe((val: boolean) => {
+      this.sidebars.addDividend = val;
     });
   }
 
   constructor(private _mutualfundsService: MutualfundsService) {
-    this.addTransaction = false;
+    //this.sidebars.addTransaction = false;
 
     this._mutualfundsService.getFundHouses().subscribe(s => {
       this._mutualfundsService.fundHouses = s;
@@ -69,7 +81,8 @@ export class MutualFundsComponent implements OnInit {
       }
     );
 
-    this._mutualfundsService.getMyFunds().subscribe(s => {
+    let request = { Type: "add", PortfolioId: -1 };
+    this._mutualfundsService.getMyFunds(request).subscribe(s => {
       this._mutualfundsService.myFunds = s;
     },
       error => {
