@@ -33,11 +33,11 @@ export class RedeemunitsComponent implements OnInit {
 
   public disableControls: any = {
     fundHouse: true,
+    funds: true,
     folios: true,
     fundtypes: true,
     fundcategory: true,
     fundoptions: true,
-    funds: true,
     saveButton: true,
   }
 
@@ -90,35 +90,55 @@ export class RedeemunitsComponent implements OnInit {
     }
 
     this.fundDetails.funds = [];
-    let request = { Type: "", PortfolioId: this.selectedportFolio.code };
-    this._mutualfundsService.getMyFunds(request).subscribe(val => {
-
-      for (let f = 0; f < val.length; f++) {
-        if (this.fundDetails.selectedHouse.code == val[f].FundHouse.FundHouseId)
-          //this.fundDetails.funds.push({ name: val[f].FundName, code: val[f].FundId });
-          this.fundDetails.funds.push({ name: val[f].FundHouse.FundHouseId, code: val[f].FundHouse.FundHouseName });
+    for (let h = 0; h < this._mutualfundsService.myinvestedFunds.length; h++) {
+      if (this._mutualfundsService.myinvestedFunds[h].FundHouse.FundHouseId == this.fundDetails.selectedHouse.code
+        && this._mutualfundsService.myinvestedFunds[h].PortfolioId == this.selectedportFolio.code) {
+        this.fundDetails.funds.push({ name: this._mutualfundsService.myinvestedFunds[h].FundName, code: this._mutualfundsService.myinvestedFunds[h].FundId });
       }
-
-      this.disableControls.folios = false;
-      this.disableControls.fundtypes = false;
-      this.disableControls.fundcategory = false;
-      this.disableControls.fundoptions = false;
-      this.disableControls.funds = false;
-      console.log('RedeemunitsComponent -- fundHouseSelected', val, this.fundDetails.funds);
-    },
-      error => {
-        console.error('RedeemunitsComponent -- fundHouseSelected', error);
-      }
-    );
-    //console.log('fundHouseSelected', this.fundDetails.selectedHouse, this.fundDetails.funds, this.folios);
+    }
+    this.disableControls.funds = false;
   }
 
   onChangePortfolios() {
     this.disableControls.fundHouse = false;
+    this.disableControls.funds = true;
+    this.disableControls.folios = true;
+    this.disableControls.fundtypes = true;
+    this.disableControls.fundcategory = true;
+    this.disableControls.fundoptions = true;
     console.log('onChangePortfolios', this.selectedportFolio);
   }
 
   onChangeFund() {
+    this.disableControls.folios = false;
+    this.disableControls.fundtypes = false;
+    this.disableControls.fundcategory = false;
+    this.disableControls.fundoptions = false;
+
+    let myFunds = this._mutualfundsService.myFunds;
+    let schemaCode = this.getSelectedFunsSchemaCode(this.fundDetails.selectedFund.code);
+    for (let f = 0; f < myFunds.length; f++) {
+      if (myFunds[f].SchemaCode == schemaCode) {
+
+        this.fundDetails.selectedFundType = { name: myFunds[f].FundType.FundType, code: myFunds[f].FundType.FundTypeId };
+        this.fundDetails.selectedFundCategory = { name: myFunds[f].FundCategory.FundClass, code: myFunds[f].FundCategory.FundClassId };
+        this.fundDetails.selectedFundOptions = { name: myFunds[f].FundOptions.FundOption, code: myFunds[f].FundOptions.OptionId };
+        return;
+      }
+    }
+  }
+
+  getSelectedFunsSchemaCode(fundId) {
+    for (let f = 0; f < this._mutualfundsService.myinvestedFunds.length; f++) {
+      if (this._mutualfundsService.myinvestedFunds[f].FundHouse.FundHouseId == this.fundDetails.selectedHouse.code
+        && this._mutualfundsService.myinvestedFunds[f].PortfolioId == this.selectedportFolio.code
+        && this._mutualfundsService.myinvestedFunds[f].FundId == fundId) {
+        return this._mutualfundsService.myinvestedFunds[f].SchemaCode;
+      }
+    }
+  }
+
+  SaveTransaction() {
 
   }
 

@@ -41,40 +41,40 @@ export class MutualFundsComponent implements OnInit {
   constructor(private _mutualfundsService: MutualfundsService) {
     //this.sidebars.addTransaction = false;
 
-    this._mutualfundsService.getFundHouses().subscribe(s => {
-      this._mutualfundsService.fundHouses = s;
+    this._mutualfundsService.getFundHouses().subscribe(val => {
+      this._mutualfundsService.fundHouses = val;
     },
       error => {
         console.error('MutualFundsComponent -- getFundHouses', error);
       }
     );
 
-    this._mutualfundsService.getFundTypes().subscribe(s => {
-      this._mutualfundsService.fundTypes = s;
+    this._mutualfundsService.getFundTypes().subscribe(val => {
+      this._mutualfundsService.fundTypes = val;
     },
       error => {
         console.error('MutualFundsComponent -- getFundTypes', error);
       }
     );
 
-    this._mutualfundsService.getFundCategory().subscribe(s => {
-      this._mutualfundsService.fundCategory = s;
+    this._mutualfundsService.getFundCategory().subscribe(val => {
+      this._mutualfundsService.fundCategory = val;
     },
       error => {
         console.error('MutualFundsComponent -- getFundCategory', error);
       }
     );
 
-    this._mutualfundsService.getFundOptions().subscribe(s => {
-      this._mutualfundsService.fundOptions = s;
+    this._mutualfundsService.getFundOptions().subscribe(val => {
+      this._mutualfundsService.fundOptions = val;
     },
       error => {
         console.error('MutualFundsComponent -- getFundOptions', error);
       }
     );
 
-    this._mutualfundsService.getFunds().subscribe(s => {
-      this._mutualfundsService.funds = s;
+    this._mutualfundsService.getFunds().subscribe(val => {
+      this._mutualfundsService.funds = val;
     },
       error => {
         console.error('MutualFundsComponent -- getFunds', error);
@@ -82,24 +82,34 @@ export class MutualFundsComponent implements OnInit {
     );
 
     let request = { Type: "add", PortfolioId: -1 };
-    this._mutualfundsService.getMyFunds(request).subscribe(s => {
-      this._mutualfundsService.myFunds = s;
+    this._mutualfundsService.getMyFunds(request).subscribe(val => {
+      this._mutualfundsService.myFunds = val;
     },
       error => {
         console.error('MutualFundsComponent -- getMyFunds', error);
       }
     );
 
-    this._mutualfundsService.getFolios().subscribe(s => {
-      this._mutualfundsService.folios = s;
+    request = { Type: "", PortfolioId: -1 };
+    this._mutualfundsService.getMyFunds(request).subscribe(val => {
+      this._mutualfundsService.myinvestedFunds = val;
+    },
+      error => {
+        console.error('MutualFundsComponent -- getMyInvestedFunds', error);
+      }
+    );
+
+
+    this._mutualfundsService.getFolios().subscribe(val => {
+      this._mutualfundsService.folios = val;
     },
       error => {
         console.error('MutualFundsComponent -- getFolios', error);
       }
     );
 
-    this._mutualfundsService.getPortFolios().subscribe(s => {
-      this._mutualfundsService.portfolios = s;
+    this._mutualfundsService.getPortFolios().subscribe(val => {
+      this._mutualfundsService.portfolios = val;
     },
       error => {
         console.error('MutualFundsComponent -- getPortFolios', error);

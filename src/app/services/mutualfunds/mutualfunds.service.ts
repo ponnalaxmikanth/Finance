@@ -24,6 +24,7 @@ export class MutualfundsService {
   public fundOptions: any;
   public funds: any;
   public myFunds: any;
+  public myinvestedFunds: any;
   public folios: any;
   public portfolios: any;
 

@@ -1,3 +1,27 @@
-<p>
-  adddividend works!
-</p>
+<h1 style="font-weight:normal; text-align: center;">Add Dividend</h1>
+
+<div class="elements">
+  <div class="row element">
+    <div class="col-lg-6">
+      <span class="label">Portfolio</span>
+      <p-dropdown [options]="portfolios" [(ngModel)]="selectedportFolio" optionLabel="name" placeholder="Portfolios" autoWidth="false" [style]="{'width':'100%'}"
+                  [showClear]="true" (onChange)="onChangePortfolios()">
+      </p-dropdown>
+    </div>
+
+    <div class="col-lg-6">
+      <span class="label">Fund House</span>
+      <p-dropdown class="" [options]="fundDetails.fundHouses" [(ngModel)]="fundDetails.selectedHouse" optionLabel="name" placeholder="Fund House"
+                  [disabled]="disableControls.fundHouse" autoWidth="false" [style]="{'width':'100%'}" [showClear]="true" filter="true" (onChange)="fundHouseSelected()">
+      </p-dropdown>
+    </div>
+  </div>
+  <div class="row element">
+    <div class="col-lg-12">
+      <span class="label">Fund</span>
+      <p-dropdown [options]="fundDetails.funds" [(ngModel)]="fundDetails.selectedFund" optionLabel="name" placeholder="Fund"
+                  [disabled]="disableControls.funds" autoWidth="false" [style]="{'width':'100%'}" [showClear]="true" filter="true" (onChange)="onChangeFund()">
+      </p-dropdown>
+    </div>
+  </div>
+</div>
