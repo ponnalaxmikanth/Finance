@@ -105,7 +105,8 @@
 
   <div class="row element">
     <div class="col-lg-2">
-      <p-button (onClick)="SaveTransaction()" icon="pi pi-check" iconPos="right" label="Save"></p-button>
+      <p-button class="disabled" *ngIf="disabled" icon="pi pi-check" iconPos="right" label="Save" disabled="true"></p-button>
+      <p-button (onClick)="SaveTransaction()" *ngIf="!disabled" icon="pi pi-check" iconPos="right" label="Save"></p-button>
     </div>
     
   </div>

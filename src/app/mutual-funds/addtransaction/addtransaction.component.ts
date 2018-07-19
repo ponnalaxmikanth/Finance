@@ -38,8 +38,9 @@ export class AddtransactionComponent implements OnInit {
   public units: number;
   public nav: number;
   public maxDate: Date = new Date();
+  public disabled: boolean = true;
 
-  public disableControls : any = {
+  public disableControls: any = {
     fundHouse: true,
     folios: true,
     fundtypes: true,
@@ -116,6 +117,7 @@ export class AddtransactionComponent implements OnInit {
     this.disableControls.growthFunds = false;
 
     console.log('fundHouseSelected', this.fundDetails.selectedHouse, this.fundDetails.funds, this.folios);
+    this.enableDisableSaveButton();
   }
 
   fundTypeSelected() {
@@ -124,23 +126,26 @@ export class AddtransactionComponent implements OnInit {
 
   fundTypeCategory() {
     console.log('fundTypeCategory', this.fundDetails.selectedFundCategory);
+    this.enableDisableSaveButton();
   }
 
   fundTypeOptions() {
     console.log('fundTypeOptions', this.fundDetails.selectedFundOptions);
+    this.enableDisableSaveButton();
   }
 
   onChangeFund() {
     console.log('on fund select', this.fundDetails.selectedFund);
     this.getFundNav();
     let myFunds = this._mutualfundsService.myFunds;
-    for (let f = 0; f < myFunds .length; f++) {
+    for (let f = 0; f < myFunds.length; f++) {
       if (myFunds[f].SchemaCode == this.fundDetails.selectedFund.code) {
-        
+
         this.fundDetails.selectedFundType = { name: myFunds[f].FundType.FundType, code: myFunds[f].FundType.FundTypeId };
         this.fundDetails.selectedFundCategory = { name: myFunds[f].FundCategory.FundClass, code: myFunds[f].FundCategory.FundClassId };
         this.fundDetails.selectedFundOptions = { name: myFunds[f].FundOptions.FundOption, code: myFunds[f].FundOptions.OptionId };
         this.fundDetails.growthSelectedFund = { name: myFunds[f].GrowthFundName, code: myFunds[f].GrowthSchemaCode };
+        this.enableDisableSaveButton();
         return;
       }
     }
@@ -166,9 +171,26 @@ export class AddtransactionComponent implements OnInit {
   onChangePortfolios() {
     this.disableControls.fundHouse = false;
     console.log('onChangePortfolios', this.selectedportFolio);
+    this.enableDisableSaveButton();
+  }
+
+  enableDisableSaveButton() {
+    if (this.selectedportFolio != undefined
+      && this.fundDetails.selectedHouse != undefined
+      && this.fundDetails.selectedFund != undefined
+      && this.fundDetails.growthSelectedFund != undefined
+      && this.selectedFolios != undefined
+      && this.fundDetails.selectedFundType != undefined
+      && this.fundDetails.selectedFundCategory != undefined
+      && this.fundDetails.selectedFundOptions != undefined
+    )
+      this.disabled = false;
+    else
+      this.disabled = true;
   }
 
   SaveTransaction() {
+    this.disabled = true;
     let request = {
       PortfolioId: this.selectedportFolio.code,
       FundHouseId: this.fundDetails.selectedHouse.code,
@@ -188,9 +210,11 @@ export class AddtransactionComponent implements OnInit {
 
     this._mutualfundsService.addPurchase(request).subscribe(s => {
       console.error('MutualFundsComponent -- addMFTransactions', s);
+      this.disabled = false;
     },
       error => {
         console.error('MutualFundsComponent -- addMFTransactions', error);
+        this.disabled = false;
       }
     );
   }
