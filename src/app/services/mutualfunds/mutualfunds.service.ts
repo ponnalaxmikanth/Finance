@@ -68,6 +68,10 @@ export class MutualfundsService {
     return this.httpClient.post(this.baseUrl + 'api/MutualFunds/GetFundNav', request, httpOptions);
   }
 
+  getMFFundInvestments(request): Observable<any> {
+    return this.httpClient.post(this.baseUrl + 'api/MutualFunds/GetMFFundInvestments', request, httpOptions);
+  }
+
   handleError(error: HttpErrorResponse) {
     console.log('MutualfundsService -- api call error', error);
   }

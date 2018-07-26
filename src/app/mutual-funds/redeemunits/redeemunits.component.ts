@@ -39,7 +39,19 @@ export class RedeemunitsComponent implements OnInit {
     fundcategory: true,
     fundoptions: true,
     saveButton: true,
-  }
+  };
+
+  public transaction: any;
+  public cols: any = [
+    { field: 'PurchaseDate', header: 'Date' },
+    { field: 'Amount', header: 'Amount' },
+    { field: 'Units', header: 'Units' },
+    { field: 'Dividend', header: 'Dividend' },
+    { field: null, header: 'Sell Units' },
+  ];
+
+  //public blockedPanel: boolean = false;
+  public blockedDocument: boolean = false;
 
   constructor(private _mutualfundsService: MutualfundsService) {
     this.portfolios = [];
@@ -115,6 +127,8 @@ export class RedeemunitsComponent implements OnInit {
     this.disableControls.fundcategory = false;
     this.disableControls.fundoptions = false;
 
+    this.gettransactions();
+
     let myFunds = this._mutualfundsService.myFunds;
     let schemaCode = this.getSelectedFunsSchemaCode(this.fundDetails.selectedFund.code);
     for (let f = 0; f < myFunds.length; f++) {
@@ -126,6 +140,16 @@ export class RedeemunitsComponent implements OnInit {
         return;
       }
     }
+  }
+
+  gettransactions() {
+    let request = { PortfolioId: this.selectedportFolio.code, FolioId: this.selectedFolios.code, FundId: this.fundDetails.selectedFund.code };
+    this.blockedDocument = true;
+    this._mutualfundsService.getMFFundInvestments(request).subscribe((val: boolean) => {
+      this.transaction = val;
+      console.log('getMFFundInvestments', val);
+      this.blockedDocument = false;
+    });
   }
 
   getSelectedFunsSchemaCode(fundId) {
