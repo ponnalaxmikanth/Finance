@@ -1,5 +1,7 @@
 import { Component, OnInit, OnChanges, Input, SimpleChanges, SimpleChange } from '@angular/core';
 import { MutualfundsService } from '../../services/mutualfunds/mutualfunds.service';
+import { MessageModule } from 'primeng/message';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-addtransaction',
@@ -50,9 +52,18 @@ export class AddtransactionComponent implements OnInit {
     growthFunds: true,
     saveButton: true,
   }
+  public blockedPanel: boolean = false;
+  public blockedDocument: boolean = false;
 
-  constructor(private _mutualfundsService: MutualfundsService) {
+  constructor(private _mutualfundsService: MutualfundsService, private messageService: MessageService) {
 
+  }
+
+  ngOnInit() {
+    this.populateSelections();
+  }
+
+  populateSelections(): any {
     this.portfolios = [];
     for (let h = 0; h < this._mutualfundsService.portfolios.length; h++) {
       this.portfolios.push({ name: this._mutualfundsService.portfolios[h].PortfolioName, code: this._mutualfundsService.portfolios[h].PortfolioId });
@@ -81,10 +92,6 @@ export class AddtransactionComponent implements OnInit {
     for (let h = 0; h < options.length; h++) {
       this.fundDetails.fundOptions.push({ name: options[h].FundOption, code: options[h].OptionId });
     }
-
-  }
-
-  ngOnInit() {
   }
 
   fundHouseSelected() {
@@ -156,7 +163,9 @@ export class AddtransactionComponent implements OnInit {
   }
 
   getFundNav() {
+    this.purchasedate.setHours(0, 0, 0, 0);
     let request = { SchemaCode: this.fundDetails.selectedFund.code, Date: this.purchasedate };
+    console.log('-- getFundNav', request);
     this._mutualfundsService.getFundNav(request).subscribe((val: number) => {
       if (val == -9999999) {
         this.nav = 0;
@@ -207,16 +216,47 @@ export class AddtransactionComponent implements OnInit {
       Units: this.units,
       IsSIP: this.IsSIP,
     };
+    this.blockedDocument = true;
+    this._mutualfundsService.addPurchase(request).subscribe(result => {
+      console.log('MutualFundsComponent -- addMFTransactions result', result);
+      //this.disabled = false;
+      //this.blockedDocument = false;
 
-    this._mutualfundsService.addPurchase(request).subscribe(s => {
-      console.error('MutualFundsComponent -- addMFTransactions', s);
-      this.disabled = false;
+      if (result != undefined && result != null && (result.ReturnCode == 0 || result.ReturnCode == "0")) {
+        this.messageService.add({ key: 'tl', severity: 'success', summary: 'Success', detail: 'Saved successfully!' });
+      }
+      else {
+        this.messageService.add({ key: 'tl', severity: 'error', summary: 'Failed', detail: 'Failed to Save!' });
+      }
+      this.clearValues();
     },
       error => {
-        console.error('MutualFundsComponent -- addMFTransactions', error);
-        this.disabled = false;
+        console.error('MutualFundsComponent -- addMFTransactions error', error);
+        this.messageService.add({ key: 'tl', severity: 'error', summary: 'Failed', detail: 'Failed to Save!' });
+        this.clearValues();
+        //this.disabled = false;
+        //this.blockedDocument = false;
       }
     );
+  }
+
+  clearValues() {
+    this.fundDetails.selectedHouse = {};
+    this.fundDetails.selectedFundType = {};
+    this.fundDetails.selectedFundCategory = {};
+    this.fundDetails.selectedFundOptions = {};
+    this.fundDetails.selectedFund = {};
+    this.fundDetails.growthSelectedFund = {};
+    this.selectedFolios = {};
+    this.units = 0;
+    this.nav = 0;
+  }
+
+  blockDocument() {
+    this.blockedDocument = true;
+    //setTimeout(() => {
+    //  this.blockedDocument = false;
+    //}, 3000);
   }
 
 }

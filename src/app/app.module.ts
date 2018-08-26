@@ -14,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //import { TreeTableModule } from '../../node_modules/primeng/components/treetable/treetable';
 import { TreeTableModule } from 'primeng/treetable';
 import { TreeNode } from 'primeng/api';
+import {ToastModule} from 'primeng/toast';
 
 import { GrowlModule } from '../../node_modules/primeng/components/growl/growl';
 import { TabViewModule } from '../../node_modules/primeng/components/tabview/tabview';
@@ -25,6 +26,9 @@ import { DropdownModule } from 'primeng/dropdown';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
+import { BlockUIModule } from 'primeng/blockui';
+import { MessageModule } from 'primeng/message';
+import { MessageService } from 'primeng/api';
 
 import { AppComponent } from './app.component';
 import { StocksComponent } from './stocks/stocks.component';
@@ -79,8 +83,10 @@ const appRoutes: Routes = [
     , CheckboxModule
     , InputTextModule
     , ButtonModule
+    , BlockUIModule
+    , ToastModule, MessageModule
   ],
-  providers: [StocksService, MutualfundsService],
+  providers: [StocksService, MutualfundsService, MessageService],
   bootstrap: [AppComponent]
 })
 
