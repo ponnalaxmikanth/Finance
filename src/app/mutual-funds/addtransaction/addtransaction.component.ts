@@ -165,7 +165,7 @@ export class AddtransactionComponent implements OnInit {
   getFundNav() {
     this.purchasedate.setHours(0, 0, 0, 0);
     let request = { SchemaCode: this.fundDetails.selectedFund.code, Date: this.purchasedate };
-    console.log('-- getFundNav', request);
+    console.log('AddtransactionComponent -- getFundNav', request);
     this._mutualfundsService.getFundNav(request).subscribe((val: number) => {
       if (val == -9999999) {
         this.nav = 0;
@@ -179,7 +179,7 @@ export class AddtransactionComponent implements OnInit {
 
   onChangePortfolios() {
     this.disableControls.fundHouse = false;
-    console.log('onChangePortfolios', this.selectedportFolio);
+    console.log('AddtransactionComponent -- onChangePortfolios', this.selectedportFolio);
     this.enableDisableSaveButton();
   }
 
