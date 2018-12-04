@@ -1,0 +1,68 @@
+<h1 style="font-weight:normal; text-align: center;">Add Expense</h1>
+
+<div class="elements home-expenses">
+  <div class="row element">
+    <div class="col-lg-12">
+      <span class="label">Date</span>
+      <p-calendar [(ngModel)]="purchasedate" class="col-lg-12" [inputStyle]="{'width':'100px'}"></p-calendar>
+    </div>
+    <div class="col-lg-6">
+      <span class="label">Group</span>
+      <p-dropdown [options]="_expensesService.expenseGroups" [(ngModel)]="selectedGroup" optionLabel="Name" placeholder="Group"
+                  autoWidth="false" [style]="{'width':'100%'}" [showClear]="true" (onChange)="onChangeGroup(event)">
+      </p-dropdown>
+    </div>
+    <div class="col-lg-6">
+      <span class="label">Sub Group</span>
+      <p-dropdown [options]="_expensesService.expenseSubGroups" [(ngModel)]="selectedSubGroup" optionLabel="SubGroupName" placeholder="Sub Group"
+                  autoWidth="false" [style]="{'width':'100%'}" [showClear]="true" (onChange)="onChangeSubGroup(event)">
+      </p-dropdown>
+    </div>
+    <div class="col-lg-12">
+      <span class="label">Account Type</span>
+      <p-dropdown [options]="_expensesService.accountTypes" [(ngModel)]="selectedAccountType" optionLabel="Type" placeholder="Account Type"
+                  autoWidth="false" [style]="{'width':'100%'}" [showClear]="true" (onChange)="onChangeAccountType(event)">
+      </p-dropdown>
+    </div>
+    <div class="col-lg-12">
+      <span class="label">Account</span>
+      <p-dropdown [options]="accounts" [(ngModel)]="selectedAccount" optionLabel="Name" placeholder="Account"
+                  autoWidth="false" [style]="{'width':'100%'}" [showClear]="true" (onChange)="onChangeAccount(event)">
+      </p-dropdown>
+    </div>
+    <div class="col-lg-12">
+      <span class="label">Item</span>
+      <!--<input class="col-lg-12" [(ngModel)]="item" />-->
+      <p-autoComplete [(ngModel)]="item" [suggestions]="filteredItems" (completeMethod)="filterItems($event)" field="name" [size]="30"
+                      placeholder="Item" [minLength]="2"></p-autoComplete>
+    </div>
+    <div class="col-lg-12 amount pad-top-20">
+      <div class="ui-inputgroup" style="width: 100%;">
+        <span class="ui-inputgroup-addon">$</span>
+        <span class="ui-float-label" style="width: 100%;">
+          <input id="float-input" type="text" size="15" pInputText [(ngModel)]="amount" style="width: 100%;" maxlength="7">
+          <label for="float-input">Amount</label>
+        </span>
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <span class="label">Strore</span>
+      
+      <p-autoComplete [(ngModel)]="strore" [suggestions]="filteredStores" (completeMethod)="getstores($event)" field="name" [size]="30"
+                      placeholder="Store Name" [minLength]="2"></p-autoComplete>
+    </div>
+    <div class="col-lg-12">
+      <span class="label">Transacted By</span>
+      <p-dropdown [options]="owners" [(ngModel)]="transactby" optionLabel="Name" placeholder="Transacted By"
+                  autoWidth="false" [style]="{'width':'100%'}" [showClear]="true" (onChange)="onChangetransactedbt(event)">
+      </p-dropdown>
+    </div>
+  </div>
+
+  <div class="action-links row">
+    <div class="col-lg-2 pad-top-20">
+      <p-button class="disabled" *ngIf="saveDisabled" [disabled]="true" icon="pi pi-check" iconPos="right" label="Save" disabled="true"></p-button>
+      <p-button (onClick)="addExpense()" *ngIf="!saveDisabled" icon="pi pi-check" iconPos="right" label="Save"></p-button>
+    </div>
+  </div>
+</div>

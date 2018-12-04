@@ -4,15 +4,19 @@
   <div class="row element">
     <div class="col-lg-6">
       <span class="label">Portfolio</span>
-      <p-dropdown [options]="portfolios" [(ngModel)]="selectedportFolio" optionLabel="name" placeholder="Portfolios" autoWidth="false" [style]="{'width':'100%'}"
+      <p-dropdown [options]="portfolios" [(ngModel)]="selectedportFolio" optionLabel="name" 
+      placeholder="Portfolios" autoWidth="false" [style]="{'width':'100%'}"
                   [showClear]="true" (onChange)="onChangePortfolios()">
       </p-dropdown>
     </div>
 
     <div class="col-lg-6">
       <span class="label">Fund House</span>
-      <p-dropdown class="" [options]="fundDetails.fundHouses" [(ngModel)]="fundDetails.selectedHouse" optionLabel="name" placeholder="Fund House"
-                  [disabled]="disableControls.fundHouse" autoWidth="false" [style]="{'width':'100%'}" [showClear]="true" filter="true" (onChange)="fundHouseSelected()">
+      <p-dropdown class="" [options]="fundDetails.fundHouses" [(ngModel)]="fundDetails.selectedHouse" 
+      optionLabel="name" placeholder="Fund House"
+                  [disabled]="disableControls.fundHouse" autoWidth="false" 
+                  [style]="{'width':'100%'}" [showClear]="true" filter="true" 
+                  (onChange)="fundHouseSelected()">
       </p-dropdown>
     </div>
   </div>

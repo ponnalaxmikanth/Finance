@@ -9,6 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import {CalendarModule} from 'primeng/calendar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common'; 
+import { ToastrModule } from 'ngx-toastr';
 
 
 //import { TreeTableModule } from '../../node_modules/primeng/components/treetable/treetable';
@@ -29,6 +31,8 @@ import { ButtonModule } from 'primeng/button';
 import { BlockUIModule } from 'primeng/blockui';
 import { MessageModule } from 'primeng/message';
 import { MessageService } from 'primeng/api';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+
 
 import { AppComponent } from './app.component';
 import { StocksComponent } from './stocks/stocks.component';
@@ -41,6 +45,8 @@ import { MutualfundsService } from '../app/services/mutualfunds/mutualfunds.serv
 import { AddtransactionComponent } from './mutual-funds/addtransaction/addtransaction.component';
 import { RedeemunitsComponent } from './mutual-funds/redeemunits/redeemunits.component';
 import { AdddividendComponent } from './mutual-funds/adddividend/adddividend.component';
+import { HomeExpensesComponent } from './home-expenses/home-expenses.component';
+import { ExpenseComponent } from './home-expenses/expense/expense.component';
 
 
 
@@ -48,7 +54,8 @@ const appRoutes: Routes = [
   { path: 'stocks', component: StocksComponent },
   { path: 'mfs', component: MutualFundsComponent },
   { path: 'accounts', component: AccountsComponent },
-  { path: 'insurances', component: InsuranceComponent }
+  { path: 'insurances', component: InsuranceComponent },
+  { path: 'Expenses', component: HomeExpensesComponent }
 ];
 
 @NgModule({
@@ -61,19 +68,20 @@ const appRoutes: Routes = [
     AddtransactionComponent,
     RedeemunitsComponent,
     AdddividendComponent,
+    HomeExpensesComponent,
+    ExpenseComponent,
   ],
   imports: [
     BrowserModule
     , HttpClientModule
     , TableModule
     , MenubarModule
-    , RouterModule.forRoot(appRoutes,{ enableTracing: true })
-    ,CalendarModule
-    ,BrowserAnimationsModule
-    ,FormsModule
+    , RouterModule.forRoot(appRoutes, { enableTracing: true })
+    , CalendarModule
+    , BrowserAnimationsModule
+    , FormsModule
     , ReactiveFormsModule
     , TreeTableModule
-    
     , GrowlModule
     , TabViewModule
     , ContextMenuModule
@@ -84,7 +92,15 @@ const appRoutes: Routes = [
     , InputTextModule
     , ButtonModule
     , BlockUIModule
-    , ToastModule, MessageModule
+    , ToastModule
+    , MessageModule
+    , CommonModule
+    , AutoCompleteModule
+    , ToastrModule.forRoot({
+      timeOut: 10000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    })
   ],
   providers: [StocksService, MutualfundsService, MessageService],
   bootstrap: [AppComponent]
