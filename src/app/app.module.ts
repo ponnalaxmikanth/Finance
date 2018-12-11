@@ -47,7 +47,7 @@ import { RedeemunitsComponent } from './mutual-funds/redeemunits/redeemunits.com
 import { AdddividendComponent } from './mutual-funds/adddividend/adddividend.component';
 import { HomeExpensesComponent } from './home-expenses/home-expenses.component';
 import { ExpenseComponent } from './home-expenses/expense/expense.component';
-
+import { MfdailytrackerComponent } from './mutual-funds/mfdailytracker/mfdailytracker.component';
 
 
 const appRoutes: Routes = [
@@ -70,6 +70,7 @@ const appRoutes: Routes = [
     AdddividendComponent,
     HomeExpensesComponent,
     ExpenseComponent,
+    MfdailytrackerComponent,
   ],
   imports: [
     BrowserModule

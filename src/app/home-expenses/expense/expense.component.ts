@@ -14,11 +14,11 @@ export class ExpenseComponent implements OnInit {
   public selectedGroup: any;
   public selectedSubGroup: any;
   public purchasedate: Date = new Date();
-  public item: string;
+  public item: any;
   public filteredItems: any[];
   public filteredStores: any[];
   public amount: string;
-  public strore: string;
+  public strore: any;
   public transactby: any;
   public accounts: any;
   public saveDisabled: boolean = false;
@@ -162,21 +162,37 @@ export class ExpenseComponent implements OnInit {
         Date: this.purchasedate,
         GroupId: this.selectedGroup.Id,
         SubGroupId: this.selectedSubGroup.Id,
-        Item: this.item,
+        Item: (this.item.name != null || this.item.name != undefined) ? this.item.name : this.item,
         Amount: this.amount,
         AccountId: this.selectedAccount.Id,
         TransactedBy: this.transactby.Name,
-        Store: this.strore
+        Store: (this.strore.name != null || this.strore.name != undefined) ? this.strore.name : this.strore,
       };
       console.log('ExpenseComponent -- addExpense', request);
 
       this._expensesService.addExpense(request).subscribe(
         (val) => {
-          console.log('ExpenseComponent -- addExpense', val); 
+          console.log('ExpenseComponent -- addExpense', val);
+          this.clearItems();
         });
     }
     catch (ex) {
       console.error('ExpenseComponent -- addExpense', ex);
+    }
+  }
+
+  clearItems() {
+    try {
+      this.selectedGroup = null;
+      this.selectedSubGroup = null;
+      this.item = null;
+      this.amount = null;
+      this.selectedAccount = null;
+      this.transactby = null;
+      this.strore = null;
+    }
+    catch (ex) {
+      console.error('ExpenseComponent -- clearItems', ex);
     }
   }
 
