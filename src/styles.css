@@ -1,7 +1,18 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 @import '~ngx-toastr/toastr.css';
+@import '~font-awesome/css/font-awesome.min.css';
+@import '~primeng/resources/primeng.min.css';
+@import '~primeng/resources/themes/nova-light/theme.css';
+@import '~primeng/resources/primeng.min.css';
+@import "~primeicons/primeicons.css";
+ 
 
-styles: [ "styles.css",
+/*styles: [ "node_modules/primeng/resources/themes/nova-light/theme.css",
+"node_modules/primeng/resources/primeng.min.css",
+"node_modules/primeicons/primeicons.css",
+],*/
+
+/*styles:["styles.css",
 "../node_modules/font-awesome/css/font-awesome.min.css",
 "../node_modules/primeng/resources/primeng.min.css",
 "../node_modules/primeng/resources/themes/darkness/theme.css",
@@ -10,9 +21,8 @@ styles: [ "styles.css",
   "../node_modules/primeng/resources/primeng.min.css",
   "../node_modules/primeicons/primeicons.css",
   "../node_modules/primeicons/resources/primeicons.css",
-]
-
+]*/
 body {
-  font-size: 12px !important;
+  font-size: 12px;
   font-family: "Merriweather", "Helvetica Neue", Arial, sans-serif !important;
 }

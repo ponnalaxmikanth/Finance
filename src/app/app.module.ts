@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import {TableModule} from 'primeng/table';
 import {MenubarModule} from 'primeng/menubar';
@@ -16,7 +17,8 @@ import { ToastrModule } from 'ngx-toastr';
 //import { TreeTableModule } from '../../node_modules/primeng/components/treetable/treetable';
 import { TreeTableModule } from 'primeng/treetable';
 import { TreeNode } from 'primeng/api';
-import {ToastModule} from 'primeng/toast';
+import { ToastModule } from 'primeng/toast';
+import { DialogModule } from 'primeng/dialog';
 
 import { GrowlModule } from '../../node_modules/primeng/components/growl/growl';
 import { TabViewModule } from '../../node_modules/primeng/components/tabview/tabview';
@@ -74,6 +76,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule
+    , NgbModule
     , HttpClientModule
     , TableModule
     , MenubarModule
@@ -94,6 +97,7 @@ const appRoutes: Routes = [
     , ButtonModule
     , BlockUIModule
     , ToastModule
+    , DialogModule
     , MessageModule
     , CommonModule
     , AutoCompleteModule

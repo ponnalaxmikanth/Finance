@@ -68,7 +68,6 @@ export class HomeexpensesService {
     return this.httpClient.get(this.baseUrl + 'api/Expenses/GetExpenseGroups', httpOptions);
   }
 
-
   getExpenseSubGroups(): Observable<any> {
     return this.httpClient.get(this.baseUrl + 'api/Expenses/GetExpenseSubGroups', httpOptions);
   }
@@ -83,6 +82,11 @@ export class HomeexpensesService {
 
   addExpense(request): Observable<any> {
     return this.httpClient.post(this.baseUrl + 'api/Expenses/AddExpense', request, httpOptions);
+  }
+
+  getTransactions(fromDate, toDate): Observable<any> {
+    let request = { FromDate: fromDate, ToDate: toDate };
+    return this.httpClient.post(this.baseUrl + 'api/Expenses/GetExpenses', request, httpOptions);
   }
 
   handleError(error: HttpErrorResponse) {

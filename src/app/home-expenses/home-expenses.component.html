@@ -1,3 +1,113 @@
+<div class="">
+  <div class="ui-g-12">
+    <div class="ui-g-3">
+      <span class="">From Date:&nbsp;&nbsp;</span>
+      <p-calendar [(ngModel)]="fromDate" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" [showIcon]="true"></p-calendar>
+    </div>
+    <div class="ui-g-3">
+      <span class="">To Date:&nbsp;&nbsp;</span>
+      <p-calendar [(ngModel)]="toDate" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" [showIcon]="true"></p-calendar>
+    </div>
+    <div class="ui-g-3">
+      <p-button (onClick)="getTransactions()" *ngIf="!saveDisabled" icon="pi pi-refresh" iconPos="right" label="Refresh"></p-button>
+    </div>
+  </div>
+  <div class="">
+    <p-tabView>
+      <p-tabPanel [header]="item.AccountDetails.DisplayName" [closable]="true" *ngFor="let item of transactions;  let i = index" [selected]="i == 0">
+        <p-table [columns]="cols" [value]="item.Transactions"
+                 [scrollable]="true" scrollHeight="400px"
+                 [resizableColumns]="true"
+                 selectionMode="single" [(selection)]="selectedTransaction" (onRowSelect)="onRowSelect($event)">
+          <ng-template pTemplate="colgroup" let-columns>
+            <colgroup>
+              <col *ngFor="let col of columns">
+            </colgroup>
+          </ng-template>
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th *ngFor="let col of columns" [pSortableColumn]="col.field" pResizableColumn>
+                {{col.header}}
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr [pSelectableRow]="rowData">
+              <!--<td *ngFor="let col of columns">{{rowData[col.field]}}</td>-->
+              <td>{{rowData.Date  | date:'MM/dd/yyyy'}}</td>
+              <td>{{rowData.ExpenseGroup.Name}}</td>
+              <td>{{rowData.ExpenseSubGroup.SubGroupName}}</td>
+              <td>{{rowData.Item}}</td>
+              <td>{{rowData.Amount}}</td>
+              <td>{{rowData.Store}}</td>
+              <td>{{rowData.TransactedBy}}</td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="summary" let-rowData>
+            <div style="text-align:left">
+              <button type="button" pButton icon="fa fa-plus" (click)="showDialogToAdd()" label="Add"></button>
+            </div>
+          </ng-template>
+        </p-table>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+
+</div>
+
+<p-dialog header="Transaction Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [style]="{width: '300px'}">
+  <div class="ui-g ui-fluid" *ngIf="transaction">
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="vin">Date</label>
+      </div>
+      <div class="ui-g-8">
+        <p-calendar [(ngModel)]="transaction.Date" yearRange="2000:2030" [showIcon]="true"></p-calendar>
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="year">Item</label>
+      </div>
+      <div class="ui-g-8">
+        <input pInputText id="Item" [(ngModel)]="transaction.Item" />
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="brand">Amount</label>
+      </div>
+      <div class="ui-g-8">
+        <input pInputText id="Amount" [(ngModel)]="transaction.Amount" />
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="color">Store</label>
+      </div>
+      <div class="ui-g-8">
+        <input pInputText id="Store" [(ngModel)]="transaction.Store" />
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="color">TransactedBy</label>
+      </div>
+      <div class="ui-g-8">
+        <input pInputText id="TransactedBy" [(ngModel)]="transaction.TransactedBy" />
+      </div>
+    </div>
+  </div>
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button type="button" pButton icon="fa fa-close" (click)="delete()" label="Delete"></button>
+      <button type="button" pButton icon="fa fa-check" (click)="save()" label="Save"></button>
+    </div>
+  </p-footer>
+</p-dialog>
+
+
 <p-sidebar [(visible)]="sidebars.addExpense" *ngIf="sidebars.addExpense" position="right" styleClass="ui-sidebar-sm">
-  <app-expense></app-expense>
+  <app-expense [transaction]="transaction"></app-expense>
 </p-sidebar>

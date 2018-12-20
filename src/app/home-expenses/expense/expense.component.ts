@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { HomeexpensesService } from '../../services/homeexpenses/homeexpenses.service';
+import { AccountDetails, AccountType, Transaction, Hometransactions } from '../../models/hometransactions';
 
 @Component({
   selector: 'app-expense',
@@ -17,11 +18,14 @@ export class ExpenseComponent implements OnInit {
   public item: any;
   public filteredItems: any[];
   public filteredStores: any[];
-  public amount: string;
+  public amount: number;
   public strore: any;
   public transactby: any;
   public accounts: any;
   public saveDisabled: boolean = false;
+  @Input() transaction: Transaction;
+
+  
 
   public owners: any = [
     { "Id": 1, "Name": "Kanth" },
@@ -33,6 +37,13 @@ export class ExpenseComponent implements OnInit {
   }
 
   ngOnInit() {
+    //console.log('ExpenseComponent -- ngOnInit', this.transaction);
+    this.selectedGroup = this.transaction.ExpenseGroup;
+    this.selectedSubGroup = this.transaction.ExpenseSubGroup;
+    this.item = this.transaction.Item;
+    this.amount = this.transaction.Amount;
+    this.strore = this.transaction.Store;
+    //this.selectedAccountType = this.transaction;
   }
 
   onChangeAccountType(event) {
