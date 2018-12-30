@@ -23,6 +23,7 @@ export class HomeExpensesComponent implements OnInit {
   public selectedTransaction: Transaction;
   public cols: any[];
   public displayDialog: boolean = false;
+  private selectedTab: number = 0;
 
   constructor(calendar: NgbCalendar, public _homeExpensesService: HomeexpensesService) {
     //console.log('HomeExpensesComponent -- constructor', calendar.getToday()
@@ -107,4 +108,8 @@ export class HomeExpensesComponent implements OnInit {
 
   }
 
+  tabChange(event) {
+    this.selectedTab = event.index;
+    console.log('tabChange', event, this.selectedTab);
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 
 import { HomeexpensesService } from '../../services/homeexpenses/homeexpenses.service';
 import { AccountDetails, AccountType, Transaction, Hometransactions } from '../../models/hometransactions';
@@ -24,6 +24,7 @@ export class ExpenseComponent implements OnInit {
   public accounts: any;
   public saveDisabled: boolean = false;
   @Input() transaction: Transaction;
+  @Output() savedTransaction: EventEmitter<any> = new EventEmitter();
 
   
 
@@ -46,6 +47,13 @@ export class ExpenseComponent implements OnInit {
     //this.selectedAccountType = this.transaction;
   }
 
+  onChangeDate(event) {
+    try {
+      console.log('onChangeDate', event, this.transaction);
+    }
+    catch (ex) { }
+  }
+
   onChangeAccountType(event) {
     try {
       //this.accounts = JSON.parse(JSON.stringify(this._expensesService.acounts));
@@ -55,7 +63,7 @@ export class ExpenseComponent implements OnInit {
         if (item.AccountType.Id == this.selectedAccountType.Id) {
           this.accounts.push(item);
         }
-        console.log('ExpenseComponent -- onChangeAccountType', this.selectedAccountType, this.accounts);
+        //console.log('ExpenseComponent -- onChangeAccountType', this.selectedAccountType, this.accounts);
       }
     }
     catch (ex) {
@@ -170,7 +178,7 @@ export class ExpenseComponent implements OnInit {
       console.log('ExpenseComponent -- addExpense');
 
       let request = {
-        Date: this.purchasedate,
+        Date: this.transaction.Date,
         GroupId: this.selectedGroup.Id,
         SubGroupId: this.selectedSubGroup.Id,
         Item: (this.item.name != null || this.item.name != undefined) ? this.item.name : this.item,
@@ -184,6 +192,7 @@ export class ExpenseComponent implements OnInit {
       this._expensesService.addExpense(request).subscribe(
         (val) => {
           console.log('ExpenseComponent -- addExpense', val);
+          this.savedTransaction.emit(true);
           this.clearItems();
         });
     }

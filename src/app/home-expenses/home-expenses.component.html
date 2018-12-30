@@ -13,10 +13,10 @@
     </div>
   </div>
   <div class="">
-    <p-tabView>
-      <p-tabPanel [header]="item.AccountDetails.DisplayName" [closable]="true" *ngFor="let item of transactions;  let i = index" [selected]="i == 0">
+    <p-tabView (onChange)="tabChange($event)">
+      <p-tabPanel [header]="item.AccountDetails.DisplayName" [closable]="true" *ngFor="let item of transactions;  let i = index" [selected]="i == selectedTab">
         <p-table [columns]="cols" [value]="item.Transactions"
-                 [scrollable]="true" scrollHeight="400px"
+                 [scrollable]="true" scrollHeight="350px"
                  [resizableColumns]="true"
                  selectionMode="single" [(selection)]="selectedTransaction" (onRowSelect)="onRowSelect($event)">
           <ng-template pTemplate="colgroup" let-columns>
@@ -109,5 +109,5 @@
 
 
 <p-sidebar [(visible)]="sidebars.addExpense" *ngIf="sidebars.addExpense" position="right" styleClass="ui-sidebar-sm">
-  <app-expense [transaction]="transaction"></app-expense>
+  <app-expense [transaction]="transaction" (savedTransaction)="getTransactions()"></app-expense>
 </p-sidebar>
