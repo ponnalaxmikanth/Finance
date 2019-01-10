@@ -1,49 +1,55 @@
 <div class="mutual-funds">
 
-  <p-sidebar [(visible)]="sidebars.addTransaction" *ngIf="sidebars.addTransaction" position="right" styleClass="ui-sidebar-md">
-    <app-addtransaction></app-addtransaction>
-  </p-sidebar>
-  <p-sidebar [(visible)]="sidebars.redeemUnits" *ngIf="sidebars.redeemUnits" position="right" styleClass="ui-sidebar-md">
-    <app-redeemunits></app-redeemunits>
-  </p-sidebar>
-  <p-sidebar [(visible)]="sidebars.addDividend" *ngIf="sidebars.addDividend" position="right" styleClass="ui-sidebar-md">
-    <app-adddividend></app-adddividend>
-  </p-sidebar>
+  <p-tabView (onChange)="tabChange($event)">
+    <p-tabPanel [header]="fundHouse.FundHouse.Name" [closable]="false" *ngFor="let fundHouse of fundTransactions;  let i = index" [selected]="i == selectedTab">
+      <app-fundvalue [fundValue]="fundHouse"></app-fundvalue>
+    </p-tabPanel>
+  </p-tabView>
 
-  <!--<div class="" *ngFor="let transaction of transactions">
-    <div class="row">
-      <div class="col-lg-5">{{transaction.FundName}}</div>
-      <div class="col-lg-1">{{transaction.Amount}}</div>
-      <div class="col-lg-1">{{transaction.Dividend}}</div>
-      <div class="col-lg-1">{{transaction.Units}}</div>
-      <div class="col-lg-2">{{transaction.PurchaseNAV}}</div>
-      <div class="col-lg-2">{{transaction.CurrentNAV}}</div>
-    </div>
-  </div>-->
-  <!--<p-treeTable [value]="transactions">
-    <p-column field="FundName" header="Name"></p-column>
-    <p-column field="Amount" header="Amount"></p-column>
-    <p-column field="Dividend" header="Dividend"></p-column>
-    <p-column field="Units" header="Units"></p-column>
-    <p-column field="PurchaseNAV" header="PurchaseNAV"></p-column>
-    <p-column field="CurrentNAV" header="CurrentNAV"></p-column>
-  </p-treeTable>-->
-  <!--<p-treeTable [value]="files">
-    <p-column>
-      <ng-template let-col let-node="rowData" pTemplate="header">
-        <button type="button" pButton label="Refresh"></button>
-      </ng-template>
-      <ng-template let-col let-node="rowData" pTemplate="body">
-        <input [(ngModel)]="node.data.name" type="text" style="width:100%">
-      </ng-template>
-    </p-column>
-  </p-treeTable>-->
-  <!--<h2>Suppliers</h2>
-  <p-treeTable [value]="nodes" (onNodeExpand)="nodeExpand($event)">
-    <p-header>List of Suppliers 2</p-header>
-    <p-column field="CompanyName" header="Company Name"></p-column>
-    <p-column field="City" header="City"></p-column>
-    <p-column field="Region" header="Region"></p-column>
-    <p-column field="Country" header="Country"></p-column>
-  </p-treeTable>-->
+      <p-sidebar [(visible)]="sidebars.addTransaction" *ngIf="sidebars.addTransaction" position="right" styleClass="ui-sidebar-md">
+        <app-addtransaction></app-addtransaction>
+      </p-sidebar>
+      <p-sidebar [(visible)]="sidebars.redeemUnits" *ngIf="sidebars.redeemUnits" position="right" styleClass="ui-sidebar-md">
+        <app-redeemunits></app-redeemunits>
+      </p-sidebar>
+      <p-sidebar [(visible)]="sidebars.addDividend" *ngIf="sidebars.addDividend" position="right" styleClass="ui-sidebar-md">
+        <app-adddividend></app-adddividend>
+      </p-sidebar>
+
+      <!--<div class="" *ngFor="let transaction of transactions">
+        <div class="row">
+          <div class="col-lg-5">{{transaction.FundName}}</div>
+          <div class="col-lg-1">{{transaction.Amount}}</div>
+          <div class="col-lg-1">{{transaction.Dividend}}</div>
+          <div class="col-lg-1">{{transaction.Units}}</div>
+          <div class="col-lg-2">{{transaction.PurchaseNAV}}</div>
+          <div class="col-lg-2">{{transaction.CurrentNAV}}</div>
+        </div>
+      </div>-->
+      <!--<p-treeTable [value]="transactions">
+        <p-column field="FundName" header="Name"></p-column>
+        <p-column field="Amount" header="Amount"></p-column>
+        <p-column field="Dividend" header="Dividend"></p-column>
+        <p-column field="Units" header="Units"></p-column>
+        <p-column field="PurchaseNAV" header="PurchaseNAV"></p-column>
+        <p-column field="CurrentNAV" header="CurrentNAV"></p-column>
+      </p-treeTable>-->
+      <!--<p-treeTable [value]="files">
+        <p-column>
+          <ng-template let-col let-node="rowData" pTemplate="header">
+            <button type="button" pButton label="Refresh"></button>
+          </ng-template>
+          <ng-template let-col let-node="rowData" pTemplate="body">
+            <input [(ngModel)]="node.data.name" type="text" style="width:100%">
+          </ng-template>
+        </p-column>
+      </p-treeTable>-->
+      <!--<h2>Suppliers</h2>
+      <p-treeTable [value]="nodes" (onNodeExpand)="nodeExpand($event)">
+        <p-header>List of Suppliers 2</p-header>
+        <p-column field="CompanyName" header="Company Name"></p-column>
+        <p-column field="City" header="City"></p-column>
+        <p-column field="Region" header="Region"></p-column>
+        <p-column field="Country" header="Country"></p-column>
+      </p-treeTable>-->
 </div>

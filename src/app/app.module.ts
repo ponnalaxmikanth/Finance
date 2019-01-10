@@ -34,7 +34,7 @@ import { BlockUIModule } from 'primeng/blockui';
 import { MessageModule } from 'primeng/message';
 import { MessageService } from 'primeng/api';
 import { AutoCompleteModule } from 'primeng/autocomplete';
-
+import { AccordionModule } from 'primeng/accordion';
 
 import { AppComponent } from './app.component';
 import { StocksComponent } from './stocks/stocks.component';
@@ -49,7 +49,9 @@ import { RedeemunitsComponent } from './mutual-funds/redeemunits/redeemunits.com
 import { AdddividendComponent } from './mutual-funds/adddividend/adddividend.component';
 import { HomeExpensesComponent } from './home-expenses/home-expenses.component';
 import { ExpenseComponent } from './home-expenses/expense/expense.component';
-import { MfdailytrackerComponent } from './mutual-funds/mfdailytracker/mfdailytracker.component';
+
+import { FundvalueComponent } from './mutual-funds/fundvalue/fundvalue.component';
+import { FundtransactionsComponent } from './mutual-funds/fundtransactions/fundtransactions.component';
 
 
 const appRoutes: Routes = [
@@ -72,7 +74,8 @@ const appRoutes: Routes = [
     AdddividendComponent,
     HomeExpensesComponent,
     ExpenseComponent,
-    MfdailytrackerComponent,
+    FundvalueComponent,
+    FundtransactionsComponent,
   ],
   imports: [
     BrowserModule
@@ -106,6 +109,7 @@ const appRoutes: Routes = [
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
     })
+    , AccordionModule
   ],
   providers: [StocksService, MutualfundsService, MessageService],
   bootstrap: [AppComponent]

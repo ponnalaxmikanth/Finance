@@ -1,0 +1,10 @@
+<div class="">
+  <p-accordion>
+    <p-accordionTab header="{{fund.Name}}" *ngFor="let fund of fundValue.FundDetails">
+      <p-header>
+        <div class="">{{fund.Name}}</div>
+      </p-header>
+      <app-fundtransactions [transactions]="fund.CurrentInvestments"></app-fundtransactions>
+    </p-accordionTab>
+  </p-accordion>
+</div>

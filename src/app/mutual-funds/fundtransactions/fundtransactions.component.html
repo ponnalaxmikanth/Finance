@@ -1,0 +1,46 @@
+<div class="">
+  <p-table [columns]="cols" [value]="transactions"
+           [scrollable]="true" scrollHeight="350px"
+           [resizableColumns]="true"
+           selectionMode="single" [(selection)]="selectedTransaction" (onRowSelect)="onRowSelect($event)">
+    <ng-template pTemplate="colgroup" let-columns>
+      <colgroup>
+        <col *ngFor="let col of columns">
+      </colgroup>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th *ngFor="let col of columns" [pSortableColumn]="col.field" pResizableColumn>
+          {{col.header}}
+          <p-sortIcon [field]="col.field"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr [pSelectableRow]="rowData">
+        <ng-container *ngFor="let col of columns">
+          <td *ngIf="PurchaseDate;">{{rowData[col.field]  | date:'MM/dd/yyyy'}}</td>
+          <td *ngIf="ISSIP; else elseBlock">{{rowData[col.field]}}</td>
+          <ng-template #elseBlock>
+            <td>{{rowData[col.field]}}</td>
+          </ng-template>
+        </ng-container>
+        <!--<td *ngFor="let col of columns">
+          {{rowData[col.field]}}
+        </td>-->
+        <!--<td>{{rowData.Date  | date:'MM/dd/yyyy'}}</td>
+      <td>{{rowData.ExpenseGroup.Name}}</td>
+      <td>{{rowData.ExpenseSubGroup.SubGroupName}}</td>
+      <td>{{rowData.Item}}</td>
+      <td>{{rowData.Amount}}</td>
+      <td>{{rowData.Store}}</td>
+      <td>{{rowData.TransactedBy}}</td>-->
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary" let-rowData>
+      <div style="text-align:left">
+        <button type="button" pButton icon="fa fa-plus" (click)="showDialogToAdd()" label="Add"></button>
+      </div>
+    </ng-template>
+  </p-table>
+</div>
