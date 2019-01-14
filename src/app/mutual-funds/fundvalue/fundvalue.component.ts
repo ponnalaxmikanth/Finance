@@ -11,10 +11,15 @@ export class FundvalueComponent implements OnInit, OnChanges {
   constructor() { }
 
   ngOnInit() {
+    //console.log('FundvalueComponent -- ngOnInit', this.fundValue);
   }
 
   ngOnChanges() {
 
+  }
+
+  showDialogToAdd(fund) {
+    console.log('FundvalueComponent -- showDialogToAdd', fund);
   }
 
 }

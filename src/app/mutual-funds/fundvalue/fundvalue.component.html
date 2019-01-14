@@ -5,6 +5,9 @@
         <div class="">{{fund.Name}}</div>
       </p-header>
       <app-fundtransactions [transactions]="fund.CurrentInvestments"></app-fundtransactions>
+      <div style="text-align:left">
+        <button type="button" pButton icon="fa fa-plus" (click)="showDialogToAdd(fund)" label="Add"></button>
+      </div>
     </p-accordionTab>
   </p-accordion>
 </div>

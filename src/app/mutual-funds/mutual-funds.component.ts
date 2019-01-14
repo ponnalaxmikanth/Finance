@@ -132,7 +132,7 @@ export class MutualFundsComponent implements OnInit {
 
   tabChange(event) {
     this.selectedTab = event.index;
-    console.log('MutualFundsComponent -- tabChange', event, this.selectedTab);
+    console.log('MutualFundsComponent -- tabChange', event, this.selectedTab, this.fundTransactions[this.selectedTab]);
   }
 
 }

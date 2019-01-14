@@ -1,8 +1,7 @@
 <div class="">
-  <p-table [columns]="cols" [value]="transactions"
-           [scrollable]="true" scrollHeight="350px"
-           [resizableColumns]="true"
-           selectionMode="single" [(selection)]="selectedTransaction" (onRowSelect)="onRowSelect($event)">
+  
+  <p-table [columns]="cols" [value]="transactions" [scrollable]="true" scrollHeight="350px" class="fund-transactions"
+           [resizableColumns]="true" selectionMode="single" [(selection)]="selectedTransaction" (onRowSelect)="onRowSelect($event)">
     <ng-template pTemplate="colgroup" let-columns>
       <colgroup>
         <col *ngFor="let col of columns">
@@ -10,7 +9,7 @@
     </ng-template>
     <ng-template pTemplate="header" let-columns>
       <tr>
-        <th *ngFor="let col of columns" [pSortableColumn]="col.field" pResizableColumn>
+        <th *ngFor="let col of columns" [pSortableColumn]="col.field" pResizableColumn class="{{col.field}}">
           {{col.header}}
           <p-sortIcon [field]="col.field"></p-sortIcon>
         </th>
@@ -19,28 +18,41 @@
     <ng-template pTemplate="body" let-rowData let-columns="columns">
       <tr [pSelectableRow]="rowData">
         <ng-container *ngFor="let col of columns">
-          <td *ngIf="PurchaseDate;">{{rowData[col.field]  | date:'MM/dd/yyyy'}}</td>
-          <td *ngIf="ISSIP; else elseBlock">{{rowData[col.field]}}</td>
-          <ng-template #elseBlock>
-            <td>{{rowData[col.field]}}</td>
-          </ng-template>
+          <td *ngIf="col.field == 'PurchaseDate'" class="{{col.field}}">
+            <span class="">{{rowData[col.field] | date:'MM/dd/yyyy'}} </span>
+          </td>
+          <td class="{{col.field}}" *ngIf="col.field == 'Amount'">{{rowData[col.field] | number:'1.2-2'}}</td>
+          <td class="{{col.field}}" *ngIf="col.field == 'CurrentValue'">{{rowData[col.field] | number:'1.2-2'}}</td>
+          <td class="{{col.field}}" *ngIf="col.field == 'Profit'">{{rowData[col.field] | number:'1.2-2'}}</td>
+          <td class="{{col.field}}" *ngIf="col.field == 'ProfitPer'">{{rowData[col.field] | number:'1.2-2'}}</td>
+          <td class="{{col.field}}" *ngIf="col.field == 'AgePer'">{{rowData[col.field] | number:'1.2-2'}}</td>
+          <td class="{{col.field}}" *ngIf="col.field == 'Units'">{{rowData[col.field] | number:'1.0-4'}}</td>
+          <td class="{{col.field}}" *ngIf="col.field == 'DividendPerNAV'">{{rowData[col.field] | number:'1.0-4'}}</td>
+          <td class="{{col.field}}" *ngIf="col.field == 'Dividend'">{{rowData[col.field] | number:'1.0-4'}}</td>
+          <td class="{{col.field}}" *ngIf="col.field == 'ISSIP' && rowData[col.field]">
+            <!--<input type="checkbox" value="rowData[col.field]" checked />-->
+            <!--<p-checkbox [(ngModel)]="sipChecked" value="sipChecked" disabled></p-checkbox>-->
+            <p-checkbox [(ngModel)]="sipChecked" binary="true" disabled></p-checkbox>
+          </td>
+          <td class="{{col.field}}" *ngIf="col.field == 'ISSIP' && !rowData[col.field]">
+            <!--<p-checkbox [(ngModel)]="sipUnChecked" value="sipUnChecked" disabled></p-checkbox>-->
+            <!--<input type="checkbox" value="rowData[col.field]" />-->
+            <p-checkbox [(ngModel)]="sipUnChecked" binary="true" disabled></p-checkbox>
+            <!--<p-checkbox value="rowData[col.field]" [(ngModel)]="rowData[col.field]"></p-checkbox>-->
+          </td>
+
+          <!--<ng-template #elseBlock>
+    <td>{{rowData[col.field]}}</td>
+  </ng-template>-->
         </ng-container>
-        <!--<td *ngFor="let col of columns">
-          {{rowData[col.field]}}
-        </td>-->
-        <!--<td>{{rowData.Date  | date:'MM/dd/yyyy'}}</td>
-      <td>{{rowData.ExpenseGroup.Name}}</td>
-      <td>{{rowData.ExpenseSubGroup.SubGroupName}}</td>
-      <td>{{rowData.Item}}</td>
-      <td>{{rowData.Amount}}</td>
-      <td>{{rowData.Store}}</td>
-      <td>{{rowData.TransactedBy}}</td>-->
+
+
       </tr>
     </ng-template>
-    <ng-template pTemplate="summary" let-rowData>
+    <!--<ng-template pTemplate="summary" let-rowData>
       <div style="text-align:left">
         <button type="button" pButton icon="fa fa-plus" (click)="showDialogToAdd()" label="Add"></button>
       </div>
-    </ng-template>
+    </ng-template>-->
   </p-table>
 </div>
