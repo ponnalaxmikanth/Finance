@@ -1,6 +1,6 @@
 <div class="">
   
-  <p-table [columns]="cols" [value]="transactions" [scrollable]="true" scrollHeight="350px" class="fund-transactions"
+  <p-table [columns]="cols" [value]="transactions" [scrollable]="true" scrollHeight="350px" class="fund-transactions" 
            [resizableColumns]="true" selectionMode="single" [(selection)]="selectedTransaction" (onRowSelect)="onRowSelect($event)">
     <ng-template pTemplate="colgroup" let-columns>
       <colgroup>
@@ -30,15 +30,10 @@
           <td class="{{col.field}}" *ngIf="col.field == 'DividendPerNAV'">{{rowData[col.field] | number:'1.0-4'}}</td>
           <td class="{{col.field}}" *ngIf="col.field == 'Dividend'">{{rowData[col.field] | number:'1.0-4'}}</td>
           <td class="{{col.field}}" *ngIf="col.field == 'ISSIP' && rowData[col.field]">
-            <!--<input type="checkbox" value="rowData[col.field]" checked />-->
-            <!--<p-checkbox [(ngModel)]="sipChecked" value="sipChecked" disabled></p-checkbox>-->
             <p-checkbox [(ngModel)]="sipChecked" binary="true" disabled></p-checkbox>
           </td>
           <td class="{{col.field}}" *ngIf="col.field == 'ISSIP' && !rowData[col.field]">
-            <!--<p-checkbox [(ngModel)]="sipUnChecked" value="sipUnChecked" disabled></p-checkbox>-->
-            <!--<input type="checkbox" value="rowData[col.field]" />-->
             <p-checkbox [(ngModel)]="sipUnChecked" binary="true" disabled></p-checkbox>
-            <!--<p-checkbox value="rowData[col.field]" [(ngModel)]="rowData[col.field]"></p-checkbox>-->
           </td>
 
           <!--<ng-template #elseBlock>

@@ -3,7 +3,7 @@ import { Component, OnInit, Input, SimpleChange, OnChanges } from '@angular/core
 @Component({
   selector: 'app-fundtransactions',
   templateUrl: './fundtransactions.component.html',
-  styleUrls: ['./fundtransactions.component.css']
+  styleUrls: ['./fundtransactions.component.scss']
 })
 export class FundtransactionsComponent implements OnInit, OnChanges {
   @Input() transactions: any;

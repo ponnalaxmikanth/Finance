@@ -37,7 +37,7 @@ export class HomeExpensesComponent implements OnInit {
 
     var now = new Date();
     this.fromDate = new Date(now.getFullYear(), now.getMonth(), 1);
-    this.getTransactions();
+    this.getTransactions(1);
   }
 
   ngOnInit() {
@@ -55,10 +55,12 @@ export class HomeExpensesComponent implements OnInit {
     this._homeExpensesService.addTransaction.subscribe((val: boolean) => {
       this.sidebars.addExpense = val;
     });
+
+    this.getTransactions(1);
   }
 
-  getTransactions() {
-    this._homeExpensesService.getTransactions(this.fromDate, this.toDate).subscribe((val: any) => {
+  getTransactions(accountId: number) {
+    this._homeExpensesService.getTransactions(this.fromDate, this.toDate, accountId).subscribe((val: any) => {
       this.transactions = val;
       console.log('HomeExpensesComponent -- getTransactions', this.fromDate, this.toDate, this.transactions);
     });

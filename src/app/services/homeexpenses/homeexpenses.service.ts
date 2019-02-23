@@ -84,8 +84,8 @@ export class HomeexpensesService {
     return this.httpClient.post(this.baseUrl + 'api/Expenses/AddExpense', request, httpOptions);
   }
 
-  getTransactions(fromDate, toDate): Observable<any> {
-    let request = { FromDate: fromDate, ToDate: toDate };
+  getTransactions(fromDate, toDate, accountId: number): Observable<any> {
+    let request = { FromDate: fromDate, ToDate: toDate, accountId: accountId };
     return this.httpClient.post(this.baseUrl + 'api/Expenses/GetExpenses', request, httpOptions);
   }
 
