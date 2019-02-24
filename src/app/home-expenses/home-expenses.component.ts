@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 
 import { HomeexpensesService } from '../services/homeexpenses/homeexpenses.service';
@@ -9,12 +9,9 @@ import { AccountDetails, AccountType, Transaction, Hometransactions } from '../m
   templateUrl: './home-expenses.component.html',
   styleUrls: ['./home-expenses.component.css']
 })
-export class HomeExpensesComponent implements OnInit {
+export class HomeExpensesComponent implements OnInit, AfterViewInit {
 
-  public sidebars: any = {
-    addExpense: false,
-    
-  };
+  public sidebars: any = { addExpense: false };
   public fromDate: Date = new Date();
   public toDate: Date = new Date();
   public transactions: Hometransactions[];
@@ -23,7 +20,9 @@ export class HomeExpensesComponent implements OnInit {
   public selectedTransaction: Transaction;
   public cols: any[];
   public displayDialog: boolean = false;
-  private selectedTab: number = 0;
+  //public selectedTab: number = 0;
+  public accounts: AccountDetails[] = new Array();;
+  public selectedAccount: AccountDetails;
 
   constructor(calendar: NgbCalendar, public _homeExpensesService: HomeexpensesService) {
     //console.log('HomeExpensesComponent -- constructor', calendar.getToday()
@@ -37,7 +36,25 @@ export class HomeExpensesComponent implements OnInit {
 
     var now = new Date();
     this.fromDate = new Date(now.getFullYear(), now.getMonth(), 1);
-    this.getTransactions(1);
+    //this.getTransactions(1);
+
+    //
+    this._homeExpensesService.getAccountDetails().subscribe(data => {
+      this.accounts = [];
+      //for (var i = 1; i < data.length; i++) {
+      //  this.accounts.push({ name: data[i].DisplayName, code: data[i].Id });
+      //}
+      for (let h = 0; h < data.length; h++) {
+        this.accounts = data as AccountDetails[];
+        //this.accounts.push({ DisplayName: data[h].DisplayName, Id: data[h].Id });
+      }
+      console.log('HomeExpensesComponent -- getAccountDetails', this.accounts);
+    },
+      error => {
+        console.error('HomeExpensesComponent -- getAccountDetails', error);
+      });
+   // this.accounts = [{ name: "BofA-Checking", code: 1 }, { name: "DCU-Checking", code: 10 }];
+    console.log('HomeExpensesComponent -- constructor', this.accounts);
   }
 
   ngOnInit() {
@@ -56,13 +73,34 @@ export class HomeExpensesComponent implements OnInit {
       this.sidebars.addExpense = val;
     });
 
-    this.getTransactions(1);
+    
   }
 
-  getTransactions(accountId: number) {
-    this._homeExpensesService.getTransactions(this.fromDate, this.toDate, accountId).subscribe((val: any) => {
-      this.transactions = val;
-      console.log('HomeExpensesComponent -- getTransactions', this.fromDate, this.toDate, this.transactions);
+  ngAfterViewInit() {
+    try {
+      //this.accounts = [];
+      //this._homeExpensesService.getAccountDetails().subscribe(data => {
+      //  for (var i = 1; i < data.length; i++) {
+      //    this.accounts.push({ name: data[i].DisplayName, code: data[i].Id });
+      //  }
+      //  console.log('HomeExpensesComponent -- getAccountDetails', this.accounts);
+      //},
+      //error => {
+      //  console.error('HomeExpensesComponent -- getAccountDetails', error);
+      //});
+    }
+    catch (ex) {
+      console.error('HomeExpensesComponent -- ngAfterViewInit', ex);
+    }
+  }
+
+  getTransactions() {
+
+    //var accountId = this._homeExpensesService.acounts[index].Id;
+    console.log('HomeExpensesComponent -- getTransactions', this.selectedAccount);
+    this._homeExpensesService.getTransactions(this.fromDate, this.toDate, this.selectedAccount.Id).subscribe((val: any) => {
+      console.log('HomeExpensesComponent -- getTransactions', this.fromDate, this.toDate, val);
+      this.transactions = val[0].Transactions;
     });
   }
 
@@ -110,8 +148,10 @@ export class HomeExpensesComponent implements OnInit {
 
   }
 
-  tabChange(event) {
-    this.selectedTab = event.index;
-    console.log('tabChange', event, this.selectedTab);
-  }
+  //tabChange(event) {
+  //  this.selectedTab = event.index;
+  //  console.log('tabChange', event, this.selectedTab);
+
+  //  this.getTransactions(event.index);
+  //}
 }

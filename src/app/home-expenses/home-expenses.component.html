@@ -8,48 +8,54 @@
       <span class="">To Date:&nbsp;&nbsp;</span>
       <p-calendar [(ngModel)]="toDate" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" [showIcon]="true"></p-calendar>
     </div>
-    <div class="ui-g-3">
+    <div class="ui-g-2">
+      <span class="">Account:&nbsp;&nbsp;</span>
+      <p-dropdown [options]="accounts" [(ngModel)]="selectedAccount" placeholder="Account" optionLabel="DisplayName" [showClear]="true"></p-dropdown>
+    </div>
+    <div class="ui-g-1">
       <p-button (onClick)="getTransactions()" *ngIf="!saveDisabled" icon="pi pi-refresh" iconPos="right" label="Refresh"></p-button>
     </div>
   </div>
-  <div class="">
-    <p-tabView (onChange)="tabChange($event)">
-      <p-tabPanel [header]="account.DisplayName" [closable]="true" *ngFor="let account of _homeExpensesService.acounts;  let i = index" [selected]="i == selectedTab">
-        <!--<p-table [columns]="cols" [value]="item.Transactions" [scrollable]="true" scrollHeight="350px" [resizableColumns]="true"
-                 selectionMode="single" [(selection)]="selectedTransaction" (onRowSelect)="onRowSelect($event)">
-          <ng-template pTemplate="colgroup" let-columns>
-            <colgroup>
-              <col *ngFor="let col of columns">
-            </colgroup>
-          </ng-template>
-          <ng-template pTemplate="header" let-columns>
-            <tr>
-              <th *ngFor="let col of columns" [pSortableColumn]="col.field" pResizableColumn>
-                {{col.header}}
-                <p-sortIcon [field]="col.field"></p-sortIcon>
-              </th>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-rowData let-columns="columns">
-            <tr [pSelectableRow]="rowData">
-              <td>{{rowData.Date  | date:'MM/dd/yyyy'}}</td>
-              <td>{{rowData.ExpenseGroup.Name}}</td>
-              <td>{{rowData.ExpenseSubGroup.SubGroupName}}</td>
-              <td>{{rowData.Item}}</td>
-              <td>{{rowData.Amount}}</td>
-              <td>{{rowData.Store}}</td>
-              <td>{{rowData.TransactedBy}}</td>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="summary" let-rowData>
-            <div style="text-align:left">
-              <button type="button" pButton icon="fa fa-plus" (click)="showDialogToAdd()" label="Add"></button>
-            </div>
-          </ng-template>
-        </p-table>-->
-      </p-tabPanel>
-    </p-tabView>
+  <div class="ui-g-12">
+    <p-table [columns]="cols" [value]="transactions" [scrollable]="true" scrollHeight="350px" [resizableColumns]="true"
+             selectionMode="single" [(selection)]="selectedTransaction" (onRowSelect)="onRowSelect($event)">
+      <ng-template pTemplate="colgroup" let-columns>
+        <colgroup>
+          <col *ngFor="let col of columns">
+        </colgroup>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns" [pSortableColumn]="col.field" pResizableColumn>
+            {{col.header}}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr [pSelectableRow]="rowData">
+          <td>{{rowData.Date | date:'dd-MMM-yyyy'}}</td>
+          <td>{{rowData.ExpenseGroup.Name}}</td>
+          <td>{{rowData.ExpenseSubGroup.SubGroupName}}</td>
+          <td>{{rowData.Item}}</td>
+          <td>{{rowData.Amount}}</td>
+          <td>{{rowData.Store}}</td>
+          <td>{{rowData.TransactedBy}}</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary" let-rowData>
+        <div style="text-align:left">
+          <button type="button" pButton icon="fa fa-plus" (click)="showDialogToAdd()" label="Add"></button>
+        </div>
+      </ng-template>
+    </p-table>
   </div>
+
+  <!--<p-tabView (onChange)="tabChange($event)">
+    <p-tabPanel [header]="account.DisplayName" [closable]="true" *ngFor="let account of _homeExpensesService.acounts;  let i = index" [selected]="i == selectedTab">
+
+    </p-tabPanel>
+  </p-tabView>-->
 
 </div>
 
