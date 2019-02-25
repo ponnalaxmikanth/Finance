@@ -1,4 +1,4 @@
-import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 
 import { HomeexpensesService } from '../../services/homeexpenses/homeexpenses.service';
 import { AccountDetails, AccountType, Transaction, Hometransactions } from '../../models/hometransactions';
@@ -8,7 +8,7 @@ import { AccountDetails, AccountType, Transaction, Hometransactions } from '../.
   templateUrl: './expense.component.html',
   styleUrls: ['./expense.component.scss']
 })
-export class ExpenseComponent implements OnInit {
+export class ExpenseComponent implements OnInit, OnChanges {
 
   public selectedAccountType: any;
   public selectedAccount: any;
@@ -24,14 +24,11 @@ export class ExpenseComponent implements OnInit {
   public accounts: any;
   public saveDisabled: boolean = false;
   @Input() transaction: Transaction;
+  @Input() accountDetails: AccountDetails;
+
   @Output() savedTransaction: EventEmitter<any> = new EventEmitter();
 
-  
-
-  public owners: any = [
-    { "Id": 1, "Name": "Kanth" },
-    { "Id": 2, "Name": "Priya" }
-  ];
+  public owners: any = [{ "Id": 1, "Name": "Kanth" }, { "Id": 2, "Name": "Priya" }];
 
   constructor(public _expensesService: HomeexpensesService) {
     this.accounts = JSON.parse(JSON.stringify(this._expensesService.acounts));
@@ -47,9 +44,19 @@ export class ExpenseComponent implements OnInit {
     //this.selectedAccountType = this.transaction;
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    try {
+      console.log('ExpenseComponent -- ngOnChanges', changes);
+      this.selectedAccount = changes.accountDetails.currentValue;
+      this.selectedAccountType = changes.accountDetails.currentValue.AccountType;
+
+    }
+    catch (ex) { console.error('ExpenseComponent -- ngOnChanges', ex); }
+  }
+
   onChangeDate(event) {
     try {
-      console.log('onChangeDate', event, this.transaction);
+      console.log('onChangeDate', event, this.transaction, this.accountDetails);
     }
     catch (ex) { }
   }
@@ -203,13 +210,13 @@ export class ExpenseComponent implements OnInit {
 
   clearItems() {
     try {
-      this.selectedGroup = null;
-      this.selectedSubGroup = null;
+      //this.selectedGroup = null;
+      //this.selectedSubGroup = null;
       this.item = null;
       this.amount = null;
-      this.selectedAccount = null;
-      this.transactby = null;
-      this.strore = null;
+      //this.selectedAccount = null;
+      //this.transactby = null;
+      //this.strore = null;
     }
     catch (ex) {
       console.error('ExpenseComponent -- clearItems', ex);
