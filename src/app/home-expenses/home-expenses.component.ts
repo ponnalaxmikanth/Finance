@@ -7,7 +7,7 @@ import { AccountDetails, AccountType, Transaction, Hometransactions, ExpenseGrou
 @Component({
   selector: 'app-home-expenses',
   templateUrl: './home-expenses.component.html',
-  styleUrls: ['./home-expenses.component.css']
+  styleUrls: ['./home-expenses.component.scss']
 })
 export class HomeExpensesComponent implements OnInit, AfterViewInit {
 

@@ -1,26 +1,26 @@
 <div class="">
-  <div class="ui-g-12">
-    <div class="ui-g-3">
+  <div class="home-expenses-wrapper">
+    <div class="column from-date">
       <span class="">From Date:&nbsp;&nbsp;</span>
       <p-calendar [(ngModel)]="fromDate" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" [showIcon]="true"></p-calendar>
     </div>
-    <div class="ui-g-3">
+    <div class="column to-date">
       <span class="">To Date:&nbsp;&nbsp;</span>
       <p-calendar [(ngModel)]="toDate" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" [showIcon]="true"></p-calendar>
     </div>
-    <div class="ui-g-3">
+    <div class="column account-type">
       <span class="">Account Type:&nbsp;&nbsp;</span>
       <p-dropdown [options]="accountTypes" [(ngModel)]="selectedAccountType" placeholder="Account Type" optionLabel="Type" [showClear]="true" (onChange)="accountTypeSelected()"></p-dropdown>
     </div>
-    <div class="ui-g-2">
+    <div class="column account">
       <span class="">Account:&nbsp;&nbsp;</span>
       <p-dropdown [options]="accounts" [(ngModel)]="selectedAccount" placeholder="Account" optionLabel="DisplayName" [showClear]="true" (onChange)="enableDisableRefresh()"></p-dropdown>
     </div>
-    <div class="ui-g-1">
-      <p-button (onClick)="getTransactions()" *ngIf="!saveDisabled" icon="pi pi-refresh" iconPos="right" label="Refresh" [disabled]="disableRefresh"></p-button>
+    <div class="column aciton-buttons">
+      <p-button *ngIf="!saveDisabled" icon="pi pi-refresh" iconPos="right" label="Refresh" [disabled]="disableRefresh" (onClick)="getTransactions()" ></p-button>
     </div>
   </div>
-  <div class="ui-g-12" *ngIf="transactions">
+  <div class="" *ngIf="transactions">
     <p-table [columns]="cols" [value]="transactions" [scrollable]="true" scrollHeight="350px" [resizableColumns]="true"
              selectionMode="single" [(selection)]="selectedTransaction" (onRowSelect)="onRowSelect($event)">
       <ng-template pTemplate="colgroup" let-columns>
