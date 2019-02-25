@@ -14,13 +14,13 @@
     </div>
     <div class="ui-g-2">
       <span class="">Account:&nbsp;&nbsp;</span>
-      <p-dropdown [options]="accounts" [(ngModel)]="selectedAccount" placeholder="Account" optionLabel="DisplayName" [showClear]="true"></p-dropdown>
+      <p-dropdown [options]="accounts" [(ngModel)]="selectedAccount" placeholder="Account" optionLabel="DisplayName" [showClear]="true" (onChange)="enableDisableRefresh()"></p-dropdown>
     </div>
     <div class="ui-g-1">
-      <p-button (onClick)="getTransactions()" *ngIf="!saveDisabled" icon="pi pi-refresh" iconPos="right" label="Refresh"></p-button>
+      <p-button (onClick)="getTransactions()" *ngIf="!saveDisabled" icon="pi pi-refresh" iconPos="right" label="Refresh" [disabled]="disableRefresh"></p-button>
     </div>
   </div>
-  <div class="ui-g-12" *ngIf="selectedAccount && transactions">
+  <div class="ui-g-12" *ngIf="transactions">
     <p-table [columns]="cols" [value]="transactions" [scrollable]="true" scrollHeight="350px" [resizableColumns]="true"
              selectionMode="single" [(selection)]="selectedTransaction" (onRowSelect)="onRowSelect($event)">
       <ng-template pTemplate="colgroup" let-columns>

@@ -35,12 +35,13 @@ export class AppComponent {
         ]
       },
       { label: 'Accounts', routerLink: ['/accounts'] },
-      { label: 'Insurance', routerLink: ['/insurances'] },
+      //{ label: 'Insurance', routerLink: ['/insurances'] },
       {
         label: 'Home', routerLink: ['/Expenses'],
-        items: [
-          { label: 'Add', icon: 'fa-plus', command: (onclick) => { this._homeExpensesService.addTransaction.next(true); } },
-        ] }
+        //items: [
+        //  { label: 'Add', icon: 'fa-plus', command: (onclick) => { this._homeExpensesService.addTransaction.next(true); } },
+        //]
+      }
     ];
   }
 

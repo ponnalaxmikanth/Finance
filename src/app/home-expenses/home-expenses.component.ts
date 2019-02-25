@@ -30,6 +30,7 @@ export class HomeExpensesComponent implements OnInit, AfterViewInit {
   public selectedAccount: AccountDetails;
 
   public transaction: Transaction = new Transaction();
+  public disableRefresh: boolean = true;
   //public accountDetails: AccountDetails;
 
   constructor(calendar: NgbCalendar, public _homeExpensesService: HomeexpensesService) {
@@ -180,17 +181,37 @@ export class HomeExpensesComponent implements OnInit, AfterViewInit {
   accountTypeSelected() {
     try {
       this.accounts = [];
-      this.allAccounts.forEach(ele => {
-        if (ele.AccountType.Id === this.selectedAccountType.Id) {
-          this.accounts.push(ele);
-        }
-        else {
-          console.log(ele.AccountType, this.selectedAccountType);
-        }
-      });
+      this.selectedAccount = null;
+      if (this.selectedAccountType != undefined && this.selectedAccountType != null) {
+        this.allAccounts.forEach(ele => {
+          if (ele.AccountType.Id === this.selectedAccountType.Id) {
+            this.accounts.push(ele);
+          }
+        });
+      }
+      this.enableDisableRefresh();
       console.log('showDialogToAdd - accountTypeSelected', this.selectedAccountType, this.accounts, this.allAccounts);
     }
     catch (ex) { console.error('showDialogToAdd - accountTypeSelected', ex); }
+  }
+
+  //accountSelected() {
+  //  try {
+
+  //  }
+  //  catch (ex) { console.error('showDialogToAdd - accountSelected', ex); }
+  //}
+
+  enableDisableRefresh() {
+    try {
+      console.log('showDialogToAdd - enableDisableRefresh', this.selectedAccountType, this.selectedAccount);
+      this.transactions = null;
+      if (this.selectedAccountType == undefined || this.selectedAccountType == null|| this.selectedAccount == undefined || this.selectedAccount == null)
+        this.disableRefresh = true;
+      else
+        this.disableRefresh = false;
+    }
+    catch (ex) { console.error('showDialogToAdd - enableDisableRefresh', ex); }
   }
 
   //tabChange(event) {
