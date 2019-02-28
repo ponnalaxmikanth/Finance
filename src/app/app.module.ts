@@ -41,8 +41,10 @@ import { StocksComponent } from './stocks/stocks.component';
 import { MutualFundsComponent } from './mutual-funds/mutual-funds.component';
 import { InsuranceComponent } from './insurance/insurance.component';
 import { AccountsComponent } from './accounts/accounts.component';
+import {BudgetComponent } from './budget/budget.component'
 
 import { StocksService } from '../app/services/stocks.service';
+import { HomeexpensesService} from '../app/services/homeexpenses/homeexpenses.service';
 import { MutualfundsService } from '../app/services/mutualfunds/mutualfunds.service';
 import { AddtransactionComponent } from './mutual-funds/addtransaction/addtransaction.component';
 import { RedeemunitsComponent } from './mutual-funds/redeemunits/redeemunits.component';
@@ -59,7 +61,8 @@ const appRoutes: Routes = [
   { path: 'mfs', component: MutualFundsComponent },
   { path: 'accounts', component: AccountsComponent },
   { path: 'insurances', component: InsuranceComponent },
-  { path: 'Expenses', component: HomeExpensesComponent }
+  { path: 'Expenses', component: HomeExpensesComponent },
+  { path: 'budget', component:BudgetComponent},
 ];
 
 @NgModule({
@@ -76,6 +79,7 @@ const appRoutes: Routes = [
     ExpenseComponent,
     FundvalueComponent,
     FundtransactionsComponent,
+    BudgetComponent,
   ],
   imports: [
     BrowserModule
@@ -111,7 +115,7 @@ const appRoutes: Routes = [
     })
     , AccordionModule
   ],
-  providers: [StocksService, MutualfundsService, MessageService],
+  providers: [StocksService, MutualfundsService, MessageService,HomeexpensesService],
   bootstrap: [AppComponent]
 })
 

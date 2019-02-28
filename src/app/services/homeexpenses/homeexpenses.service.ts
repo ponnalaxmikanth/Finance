@@ -92,5 +92,12 @@ export class HomeexpensesService {
   handleError(error: HttpErrorResponse) {
     console.error('HomeexpensesService -- api call error', error);
   }
-
+ getBudgetDetails():Observable<any>{
+   try{
+      return this.httpClient.get("assets/Data/Budget/budget.json");
+   }
+   catch(exc){
+     console.log("home expenses service--getbudgetdetails",exc);
+   }
+ }
 }

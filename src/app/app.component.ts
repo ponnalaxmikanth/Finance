@@ -41,6 +41,9 @@ export class AppComponent {
         //items: [
         //  { label: 'Add', icon: 'fa-plus', command: (onclick) => { this._homeExpensesService.addTransaction.next(true); } },
         //]
+      },
+      {
+        label: 'Budget', routerLink: ['/budget'],       
       }
     ];
   }
