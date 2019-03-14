@@ -1,8 +1,45 @@
 .fund-transactions
  {
   table {
-          thead{
+          thead {
                  font-size: 12px;
                }
+        }
+        tr {
+                .PurchaseDate {
+                        width: 160px;
+                }
+                .Amount {
+                        width: 110px;
+                }
+                .CurrentValue {
+                        width: 160px;
+                }
+                .Profit {
+                        width: 105px;
+                }
+                .ProfitPer {
+                        width: 120px;
+                }
+                .AgePer {
+                        width: 100px;
+                }
+                .Units {
+                        width: 110px;
+                }
+                .DividendPerNAV {
+                        width: 170px;
+                }
+                .Dividend {
+                        width: 120px;
+                }
+                .ISSIP {
+                        width: 70px;
+                        text-align: center;
+                }
+
+                .number-format {
+                        text-align: right;
+                }
         }
 }

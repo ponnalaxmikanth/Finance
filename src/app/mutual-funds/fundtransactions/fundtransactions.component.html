@@ -21,14 +21,14 @@
           <td *ngIf="col.field == 'PurchaseDate'" class="{{col.field}}">
             <span class="">{{rowData[col.field] | date:'MM/dd/yyyy'}} </span>
           </td>
-          <td class="{{col.field}}" *ngIf="col.field == 'Amount'">{{rowData[col.field] | number:'1.2-2'}}</td>
-          <td class="{{col.field}}" *ngIf="col.field == 'CurrentValue'">{{rowData[col.field] | number:'1.2-2'}}</td>
-          <td class="{{col.field}}" *ngIf="col.field == 'Profit'">{{rowData[col.field] | number:'1.2-2'}}</td>
-          <td class="{{col.field}}" *ngIf="col.field == 'ProfitPer'">{{rowData[col.field] | number:'1.2-2'}}</td>
-          <td class="{{col.field}}" *ngIf="col.field == 'AgePer'">{{rowData[col.field] | number:'1.2-2'}}</td>
-          <td class="{{col.field}}" *ngIf="col.field == 'Units'">{{rowData[col.field] | number:'1.0-4'}}</td>
-          <td class="{{col.field}}" *ngIf="col.field == 'DividendPerNAV'">{{rowData[col.field] | number:'1.0-4'}}</td>
-          <td class="{{col.field}}" *ngIf="col.field == 'Dividend'">{{rowData[col.field] | number:'1.0-4'}}</td>
+          <td class="number-format {{col.field}}" *ngIf="col.field == 'Amount'">{{rowData[col.field] | number:'1.2-2'}}</td>
+          <td class="number-format {{col.field}}" *ngIf="col.field == 'CurrentValue'">{{rowData[col.field] | number:'1.2-2'}}</td>
+          <td class="number-format {{col.field}}" *ngIf="col.field == 'Profit'">{{rowData[col.field] | number:'1.2-2'}}</td>
+          <td class="number-format {{col.field}}" *ngIf="col.field == 'ProfitPer'">{{rowData[col.field] | number:'1.2-2'}}</td>
+          <td class="number-format {{col.field}}" *ngIf="col.field == 'AgePer'">{{rowData[col.field] | number:'1.2-2'}}</td>
+          <td class="number-format {{col.field}}" *ngIf="col.field == 'Units'">{{rowData[col.field] | number:'1.0-4'}}</td>
+          <td class="number-format {{col.field}}" *ngIf="col.field == 'DividendPerNAV'">{{rowData[col.field] | number:'1.0-4'}}</td>
+          <td class="number-format {{col.field}}" *ngIf="col.field == 'Dividend'">{{rowData[col.field] | number:'1.0-4'}}</td>
           <td class="{{col.field}}" *ngIf="col.field == 'ISSIP' && rowData[col.field]">
             <p-checkbox [(ngModel)]="sipChecked" binary="true" disabled></p-checkbox>
           </td>
