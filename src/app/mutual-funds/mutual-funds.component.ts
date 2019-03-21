@@ -19,8 +19,9 @@ import { MutualfundsService } from '../services/mutualfunds/mutualfunds.service'
 export class MutualFundsComponent implements OnInit {
 
   public sidebars: any = { addTransaction: false, redeemUnits: false, addDividend: false };
-  private selectedTab: number = 0;
+  private selectedTab = 0;
   public fundTransactions: any;
+  public selectedType: any;
 
   ngOnInit() {
     this._mutualfundsService.addMFTransactions.subscribe((val: boolean) => {
@@ -35,7 +36,7 @@ export class MutualFundsComponent implements OnInit {
       this.sidebars.addDividend = val;
     });
 
-    this.getFundTransactions();
+    //this.getFundTransactions();
   }
 
   constructor(private _mutualfundsService: MutualfundsService) {
@@ -81,7 +82,7 @@ export class MutualFundsComponent implements OnInit {
       }
     );
 
-    let request = { Type: "add", PortfolioId: -1 };
+    let request = { Type: 'add', PortfolioId: -1 };
     this._mutualfundsService.getMyFunds(request).subscribe(val => {
       this._mutualfundsService.myFunds = val;
     },
@@ -90,7 +91,7 @@ export class MutualFundsComponent implements OnInit {
       }
     );
 
-    request = { Type: "", PortfolioId: -1 };
+    request = { Type: '', PortfolioId: -1 };
     this._mutualfundsService.getMyFunds(request).subscribe(val => {
       this._mutualfundsService.myinvestedFunds = val;
     },
@@ -115,11 +116,10 @@ export class MutualFundsComponent implements OnInit {
         console.error('MutualFundsComponent -- getPortFolios', error);
       }
     );
-    
   }
 
   getFundTransactions() {
-    let request = { "PortfolioId": "1", "FromDate": "01/01/2008", "ToDate": new Date(), "Type": "Invest" };
+    const request = { 'PortfolioId': '1', 'FromDate': '01/01/2008', 'ToDate': new Date(), 'Type': 'Invest' };
     this._mutualfundsService.getFundTransactions(request).subscribe(val => {
       console.log('MutualFundsComponent -- getFundTransactions', val);
       this.fundTransactions = val;

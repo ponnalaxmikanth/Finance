@@ -4,6 +4,9 @@ import { MenuItem } from 'primeng/api';
 import {MenubarModule} from 'primeng/menubar';
 
 import { ToastrService } from 'ngx-toastr';
+//import { Excel } from 'office-js';
+//import * as OfficeHelpers from '@microsoft/office-js-helpers';
+
 
 import { MutualfundsService } from './services/mutualfunds/mutualfunds.service';
 import { HomeexpensesService } from './services/homeexpenses/homeexpenses.service';
@@ -15,6 +18,7 @@ import { HomeexpensesService } from './services/homeexpenses/homeexpenses.servic
 })
 export class AppComponent {
   title = 'app';
+  welcomeMessage = 'Welcome';
 
   constructor(private _mutualfundsService: MutualfundsService
     , private _homeExpensesService: HomeexpensesService, private toastr: ToastrService) {
@@ -27,7 +31,7 @@ export class AppComponent {
     this.menuItems = [
       { label: 'Stocks', routerLink: ['/stocks'] },
       {
-        label: 'Mutual Funds', routerLink: ['/mfs'],
+        label: 'Mutual Funds', routerLink: ['/mutualfunds'],
         items: [
           { label: 'Add', icon: 'fa-plus', command: (onclick) => { this._mutualfundsService.addMFTransactions.next(true); } },
           { label: 'Redeem', icon: 'fa-minus', command: (onclick) => { this._mutualfundsService.redeenUnits.next(true); } },
@@ -63,6 +67,21 @@ export class AppComponent {
 
     console.log('showSuccess', ActiveToast);
   }
+
+  async setColor() {
+    // try {
+    //     await Excel.run(async context => {
+    //         const range = context.workbook.getSelectedRange();
+    //         range.load('address');
+    //         range.format.fill.color = 'green';
+    //         await context.sync();
+    //         console.log(`The range address was ${range.address}.`);
+    //     });
+    // } catch (error) {
+    //     OfficeHelpers.UI.notify(error);
+    //     OfficeHelpers.Utilities.log(error);
+    // }
+}
 
 }
 

@@ -1,13 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import {TableModule} from 'primeng/table';
-import {MenubarModule} from 'primeng/menubar';
-
 import { HttpClientModule } from '@angular/common/http';
-import {CalendarModule} from 'primeng/calendar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common'; 
@@ -19,6 +16,11 @@ import { TreeTableModule } from 'primeng/treetable';
 import { TreeNode } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { DialogModule } from 'primeng/dialog';
+import {TableModule} from 'primeng/table';
+import {MenubarModule} from 'primeng/menubar';
+import {CalendarModule} from 'primeng/calendar';
+import { RadioButtonModule } from 'primeng/radiobutton';
+
 
 import { GrowlModule } from '../../node_modules/primeng/components/growl/growl';
 import { TabViewModule } from '../../node_modules/primeng/components/tabview/tabview';
@@ -58,7 +60,7 @@ import { FundtransactionsComponent } from './mutual-funds/fundtransactions/fundt
 
 const appRoutes: Routes = [
   { path: 'stocks', component: StocksComponent },
-  { path: 'mfs', component: MutualFundsComponent },
+  { path: 'mutualfunds', component: MutualFundsComponent },
   { path: 'accounts', component: AccountsComponent },
   { path: 'insurances', component: InsuranceComponent },
   { path: 'Expenses', component: HomeExpensesComponent },
@@ -87,7 +89,7 @@ const appRoutes: Routes = [
     , HttpClientModule
     , TableModule
     , MenubarModule
-    , RouterModule.forRoot(appRoutes, { enableTracing: true })
+    , RouterModule.forRoot(appRoutes, { enableTracing: true, useHash: true })
     , CalendarModule
     , BrowserAnimationsModule
     , FormsModule
@@ -114,8 +116,10 @@ const appRoutes: Routes = [
       preventDuplicates: true,
     })
     , AccordionModule
+    , RadioButtonModule
   ],
-  providers: [StocksService, MutualfundsService, MessageService,HomeexpensesService],
+  providers: [StocksService, MutualfundsService, MessageService, HomeexpensesService,
+    { provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]
 })
 

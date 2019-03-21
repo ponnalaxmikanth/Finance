@@ -1,10 +1,19 @@
 <div class="mutual-funds">
 
-  <p-tabView (onChange)="tabChange($event)">
+    <div class="ui-g" style="margin-bottom:10px;display: flex;flex-direction: row;flex-wrap: wrap;justify-content: space-evenly;">
+        <!-- <div class=""><p-radioButton name="type" value="All" label="All" [(ngModel)]="selectedType" inputId="preopt1"></p-radioButton></div>
+        <div class=""><p-radioButton name="type" value="Invest" label="Invest" [(ngModel)]="selectedType" inputId="preopt2"></p-radioButton></div>
+        <div class=""><p-radioButton name="type" value="Redeem" label="Redeems" [(ngModel)]="selectedType" inputId="preopt3"></p-radioButton></div>
+        <div class=""><p-radioButton name="type" value="RedeemedInvest" label="Redeemed Investments" [(ngModel)]="selectedType" inputId="preopt4"></p-radioButton></div> -->
+        <span class="">Portfolio:&nbsp;&nbsp;</span>
+        <p-dropdown [options]="accountTypes" [(ngModel)]="selectedAccountType" placeholder="Account Type" optionLabel="Type" [showClear]="true" (onChange)="accountTypeSelected()"></p-dropdown>
+    </div>
+
+  <!-- <p-tabView (onChange)="tabChange($event)">
     <p-tabPanel [header]="fundHouse.FundHouse.Name" [closable]="false" *ngFor="let fundHouse of fundTransactions;  let i = index" [selected]="i == selectedTab">
       <app-fundvalue [fundValue]="fundHouse"></app-fundvalue>
     </p-tabPanel>
-  </p-tabView>
+  </p-tabView> -->
 
       <p-sidebar [(visible)]="sidebars.addTransaction" *ngIf="sidebars.addTransaction" position="right" styleClass="ui-sidebar-md">
         <app-addtransaction></app-addtransaction>
