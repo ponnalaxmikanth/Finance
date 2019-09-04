@@ -20,9 +20,10 @@
             <tr>
               <td>{{rowData.Symbol}}</td>
               <td>{{rowData.Date  | date: 'MM/dd/yyyy' }}</td>
-              <td>{{rowData.volume}}</td>
+              <td>{{rowData.volume }}</td>
               <td>{{rowData.close | currency}}</td>
               <td>{{rowData.MarketPrice | currency}}</td>
+              <td>{{ (rowData.volume * rowData.MarketPrice) - (rowData.volume * rowData.close) | currency}}</td>
               <td>{{rowData.dividendamount | currency}}</td>
             </tr>
           </ng-template>

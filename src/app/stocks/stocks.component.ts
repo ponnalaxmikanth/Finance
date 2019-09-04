@@ -26,6 +26,7 @@ export class StocksComponent implements OnInit {
       { field: 'volume', header: 'Quantity' },
       { field: 'close', header: 'Average Price' },
       { field: 'MarketPrice', header: 'Current Price' },
+      { field: '', header: 'Profit' },
       { field: 'dividendamount', header: 'Dividend' }
     ];
     var d = new Date();
