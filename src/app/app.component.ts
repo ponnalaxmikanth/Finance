@@ -29,25 +29,27 @@ export class AppComponent {
 
   ngOnInit() {
     this.menuItems = [
-      { label: 'Stocks', routerLink: ['/stocks'] },
+      { label: 'Stocks', routerLink: ['/stocks']
+      , items: [ {label: 'Track Stocks', routerLink: ['/stocks'] }]
+      },
       {
         label: 'Mutual Funds', routerLink: ['/mutualfunds'],
         items: [
-          { label: 'Add', icon: 'fa-plus', command: (onclick) => { this._mutualfundsService.addMFTransactions.next(true); } },
-          { label: 'Redeem', icon: 'fa-minus', command: (onclick) => { this._mutualfundsService.redeenUnits.next(true); } },
-          { label: 'Dividend', icon: 'fa-plus', command: (onclick) => { this._mutualfundsService.addDividend.next(true); } },
+          { label: 'Add', icon: 'fa fa-plus', command: (onclick) => { this._mutualfundsService.addMFTransactions.next(true); } },
+          { label: 'Redeem', icon: 'fa fa-minus', command: (onclick) => { this._mutualfundsService.redeenUnits.next(true); } },
+          { label: 'Dividend', icon: 'fa fa-plus', command: (onclick) => { this._mutualfundsService.addDividend.next(true); } },
         ]
       },
       { label: 'Accounts', routerLink: ['/accounts'] },
-      //{ label: 'Insurance', routerLink: ['/insurances'] },
       {
         label: 'Home', routerLink: ['/Expenses'],
         //items: [
         //  { label: 'Add', icon: 'fa-plus', command: (onclick) => { this._homeExpensesService.addTransaction.next(true); } },
         //]
       },
-      {
-        label: 'Budget', routerLink: ['/budget'],       
+      { label: 'Budget', routerLink: ['/budget'], },
+      { label: 'Expense Tracker', routerLink: ['/trackexpenses']
+      , items: [ {label: 'Track Expenses', routerLink: ['/trackexpenses'] }]
       }
     ];
   }

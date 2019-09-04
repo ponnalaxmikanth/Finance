@@ -18,6 +18,7 @@ import { ToastModule } from 'primeng/toast';
 import { DialogModule } from 'primeng/dialog';
 import {TableModule} from 'primeng/table';
 import {MenubarModule} from 'primeng/menubar';
+import { MenuModule } from 'primeng/menu';
 import {CalendarModule} from 'primeng/calendar';
 import { RadioButtonModule } from 'primeng/radiobutton';
 
@@ -38,12 +39,14 @@ import { MessageService } from 'primeng/api';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { AccordionModule } from 'primeng/accordion';
 
+import { FileUploadModule } from 'ng2-file-upload';
+
 import { AppComponent } from './app.component';
 import { StocksComponent } from './stocks/stocks.component';
 import { MutualFundsComponent } from './mutual-funds/mutual-funds.component';
 import { InsuranceComponent } from './insurance/insurance.component';
 import { AccountsComponent } from './accounts/accounts.component';
-import {BudgetComponent } from './budget/budget.component'
+import {BudgetComponent } from './budget/budget.component';
 
 import { StocksService } from '../app/services/stocks.service';
 import { HomeexpensesService} from '../app/services/homeexpenses/homeexpenses.service';
@@ -56,7 +59,7 @@ import { ExpenseComponent } from './home-expenses/expense/expense.component';
 
 import { FundvalueComponent } from './mutual-funds/fundvalue/fundvalue.component';
 import { FundtransactionsComponent } from './mutual-funds/fundtransactions/fundtransactions.component';
-
+import { ExpensetrackerComponent } from './expensetracker/expensetracker.component';
 
 const appRoutes: Routes = [
   { path: 'stocks', component: StocksComponent },
@@ -64,7 +67,8 @@ const appRoutes: Routes = [
   { path: 'accounts', component: AccountsComponent },
   { path: 'insurances', component: InsuranceComponent },
   { path: 'Expenses', component: HomeExpensesComponent },
-  { path: 'budget', component:BudgetComponent},
+  { path: 'budget', component: BudgetComponent},
+  { path: 'trackexpenses', component: ExpensetrackerComponent },
 ];
 
 @NgModule({
@@ -82,6 +86,7 @@ const appRoutes: Routes = [
     FundvalueComponent,
     FundtransactionsComponent,
     BudgetComponent,
+    ExpensetrackerComponent,
   ],
   imports: [
     BrowserModule
@@ -89,6 +94,7 @@ const appRoutes: Routes = [
     , HttpClientModule
     , TableModule
     , MenubarModule
+    , MenuModule
     , RouterModule.forRoot(appRoutes, { enableTracing: true, useHash: true })
     , CalendarModule
     , BrowserAnimationsModule
@@ -117,6 +123,7 @@ const appRoutes: Routes = [
     })
     , AccordionModule
     , RadioButtonModule
+    , FileUploadModule
   ],
   providers: [StocksService, MutualfundsService, MessageService, HomeexpensesService,
     { provide: LocationStrategy, useClass: HashLocationStrategy }],

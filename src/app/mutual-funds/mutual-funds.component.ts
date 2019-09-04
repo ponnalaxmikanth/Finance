@@ -23,6 +23,9 @@ export class MutualFundsComponent implements OnInit {
   public fundTransactions: any;
   public selectedType: any;
 
+  public transactionTypes: any;
+  public selectedTransactionType: any;
+
   ngOnInit() {
     this._mutualfundsService.addMFTransactions.subscribe((val: boolean) => {
       this.sidebars.addTransaction = val;
@@ -36,6 +39,12 @@ export class MutualFundsComponent implements OnInit {
       this.sidebars.addDividend = val;
     });
 
+    this.transactionTypes =  [
+      { 'text': 'All', 'value': 'All' }
+      , { 'text': 'Invest', 'value': 'Invest' }
+      , { 'text': 'Redeem', 'value': 'Redeem' }
+      , { 'text': 'RedeemedInvest', 'value': 'RedeemedInvest' }
+    ];
     //this.getFundTransactions();
   }
 
@@ -116,6 +125,10 @@ export class MutualFundsComponent implements OnInit {
         console.error('MutualFundsComponent -- getPortFolios', error);
       }
     );
+  }
+
+  transactionTypeSelected() {
+
   }
 
   getFundTransactions() {

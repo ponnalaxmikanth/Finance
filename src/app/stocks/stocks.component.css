@@ -4,3 +4,7 @@ input{
 button{
     margin: 10px;
 }
+
+.stocks-wrapper {
+    padding: 5px 5px;
+}

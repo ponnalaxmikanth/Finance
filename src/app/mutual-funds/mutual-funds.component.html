@@ -6,7 +6,7 @@
         <div class=""><p-radioButton name="type" value="Redeem" label="Redeems" [(ngModel)]="selectedType" inputId="preopt3"></p-radioButton></div>
         <div class=""><p-radioButton name="type" value="RedeemedInvest" label="Redeemed Investments" [(ngModel)]="selectedType" inputId="preopt4"></p-radioButton></div> -->
         <span class="">Portfolio:&nbsp;&nbsp;</span>
-        <p-dropdown [options]="accountTypes" [(ngModel)]="selectedAccountType" placeholder="Account Type" optionLabel="Type" [showClear]="true" (onChange)="accountTypeSelected()"></p-dropdown>
+        <p-dropdown [options]="transactionTypes" [(ngModel)]="selectedTransactionType" placeholder="Transaction Type" optionLabel="text" [showClear]="true" (onChange)="transactionTypeSelected()"></p-dropdown>
     </div>
 
   <!-- <p-tabView (onChange)="tabChange($event)">

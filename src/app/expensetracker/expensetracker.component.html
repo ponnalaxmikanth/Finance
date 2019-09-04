@@ -1,0 +1,79 @@
+<div class="expenses-tracker-wrapper">
+  <div class="select-lists">
+    <div class="column from-date">
+      <span class="">From Date:&nbsp;&nbsp;</span>
+      <p-calendar [(ngModel)]="fromDate" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" [showIcon]="true" (onSelect)="fromDateChanged()"></p-calendar>
+    </div>
+    <div class="column to-date">
+      <span class="">To Date:&nbsp;&nbsp;</span>
+      <p-calendar [(ngModel)]="toDate" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" [showIcon]="true"(onSelect)="toDateChanged()"></p-calendar>
+    </div>
+    <div class="column aciton-buttons">
+        <p-button icon="pi pi-refresh" iconPos="right" label="Refresh" (onClick)="getTransactions()" ></p-button>
+      </div>
+  </div>
+  <div class="expenses-grid" *ngIf="transactions">
+    <div class="label">Expenses</div>
+      <p-table [columns]="cols" [value]="transactions.Expenses" [scrollable]="true" scrollHeight="320px" [resizableColumns]="true">
+        <ng-template pTemplate="colgroup" let-columns>
+          <colgroup>
+            <col *ngFor="let col of columns">
+          </colgroup>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th *ngFor="let col of columns" [pSortableColumn]="col.field" pResizableColumn>
+              {{col.header}}
+              <p-sortIcon [field]="col.field"></p-sortIcon>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+          <tr [pSelectableRow]="rowData" class="{{rowData.Group}}">
+            <td>{{rowData.Group}}</td>
+            <td>{{rowData.SubGroup}}</td>
+            <td>{{rowData.Debit | currency}}</td>
+            <td>{{rowData.Credit | currency}}</td>
+            <td>{{rowData.BudgetAmount | currency}}</td>
+            <td>{{rowData.Balance | currency}}</td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage" let-columns>
+          <tr>
+            <td [attr.colspan]="columns.length">
+              No records found
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+    <div class="expenses-summary" *ngIf="transactions">
+        <div class="label">Summary</div>
+        <p-table [columns]="cols" [value]="transactions.Summary" [resizableColumns]="true">
+            <ng-template pTemplate="colgroup" let-columns>
+                <colgroup>
+                  <col *ngFor="let col of columns">
+                </colgroup>
+              </ng-template>
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th *ngFor="let col of columns" pResizableColumn>
+                    {{col.header}}
+                  </th>
+                  <th>Saving</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-rowData let-columns="columns">
+                  <tr class="Summary">
+                    <td class="{{columns.class}}">{{rowData.Group}}</td>
+                    <td class="{{columns.class}}">{{rowData.SubGroup}}</td>
+                    <td class="{{columns.class}}">{{rowData.Debit | currency}}</td>
+                    <td class="{{columns.class}}">{{rowData.Credit | currency}}</td>
+                    <td class="{{columns.class}}">{{rowData.BudgetAmount | currency}}</td>
+                    <td class="{{columns.class}}">{{rowData.Balance | currency}}</td>
+                    <td class="{{columns.class}}">{{rowData.Credit - rowData.Debit | currency}}</td>
+                  </tr>
+                </ng-template>
+        </p-table>
+    </div>
+</div>

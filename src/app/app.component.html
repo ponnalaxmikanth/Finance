@@ -1,5 +1,8 @@
-<p-menubar [model]="menuItems"></p-menubar>
-
+<!-- <p-menubar [model]="menuItems"></p-menubar> -->
+<div class="top-menu">
+    <p-menu #menu [popup]="true" [model]="menuItems"></p-menu>
+    <button type="button" pButton icon="pi pi-bars" label="Menu" (click)="menu.toggle($event)"></button>        
+</div>
 <div class="" style="margin-top: 10px"></div>
 <router-outlet class="bodyEle">
 

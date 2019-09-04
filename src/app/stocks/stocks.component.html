@@ -1,25 +1,33 @@
-
-<div>
-  <label for="fromdate">FromDate</label>
-  <p-calendar [(ngModel)]="fromdate" dateFormat="mm/dd/yy"> </p-calendar>
-  <label for="todate">ToDate</label>
-  <p-calendar [(ngModel)]="todate" dateFormat="mm/dd/yy"> </p-calendar>
-  <button onclick="getStocks()">Show</button>
+<div class="stocks-wrapper">
+  <div class="select-lists">
+    <label for="fromdate">FromDate</label>
+    <p-calendar [(ngModel)]="fromdate" dateFormat="mm/dd/yy"> </p-calendar>
+    <label for="todate">ToDate</label>
+    <p-calendar [(ngModel)]="todate" dateFormat="mm/dd/yy"> </p-calendar>
+    <button onclick="getStocks()">Show</button>
+    </div>
+    <div class="expenses-grid">
+      <p-table [columns]="cols" [value]="stocks">
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                {{col.header}}
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr>
+              <td>{{rowData.Symbol}}</td>
+              <td>{{rowData.Date  | date: 'MM/dd/yyyy' }}</td>
+              <td>{{rowData.volume}}</td>
+              <td>{{rowData.close | currency}}</td>
+              <td>{{rowData.MarketPrice | currency}}</td>
+              <td>{{rowData.dividendamount | currency}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+          
+    </div>
 </div>
-<p-table [columns]="cols" [value]="stocks">
-  <ng-template pTemplate="header" let-columns>
-    <tr>
-      <th *ngFor="let col of columns" [pSortableColumn]="col.field">
-        {{col.header}}
-        <p-sortIcon [field]="col.field"></p-sortIcon>
-      </th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-rowData let-columns="columns">
-    <tr>
-      <td *ngFor="let col of columns">
-        {{rowData[col.field]}}
-      </td>
-    </tr>
-  </ng-template>
-</p-table>
+

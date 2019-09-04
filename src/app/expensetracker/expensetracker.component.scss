@@ -1,0 +1,31 @@
+.expenses-tracker-wrapper {
+  padding: 0px 10px;
+    .select-lists {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        margin-bottom: 10px;
+        .column {
+          display: flex;
+          flex-direction: column;
+          margin: 0px 20px;
+        }
+        .aciton-buttons {
+          padding-top: 18px;
+        }
+    }
+    .expenses-grid {
+        height: 400px;
+        // .Total {
+        //   background-color: cadetblue;
+        //   color: white;
+        // }
+        // .ui-table-summary {
+        //   padding: 0px;
+        // }
+    }
+    .expenses-summary {
+      // padding-top: 20px;
+    }
+  }
+  

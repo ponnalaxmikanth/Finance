@@ -81,11 +81,13 @@ export class HomeExpensesComponent implements OnInit, AfterViewInit {
       { field: 'Date', header: 'Date' },
       { field: 'GroupName', header: 'Group' },
       { field: 'SubGroupName', header: 'Sub Group' },
-      //{ field: 'ExpenseGroup.Name', header: 'Group' },
-      //{ field: 'ExpenseSubGroup.SubGroupName', header: 'Sub Group' },
-      { field: 'Item', header: 'Item' },
-      { field: 'Amount', header: 'Amount' },
-      { field: 'Store', header: 'Store' },
+      // { field: 'ExpenseGroup.Name', header: 'Group' },
+      // { field: 'ExpenseSubGroup.SubGroupName', header: 'Sub Group' },
+      // { field: 'Item', header: 'Item' },
+      { field: 'Debit', header: 'Debit' },
+      { field: 'Credit', header: 'Credit' },
+      { field: 'Balance', header: 'Balance' },
+      // { field: 'Store', header: 'Store' },
       { field: 'TransactedBy', header: 'Transacted By' }
     ];
     this._homeExpensesService.addTransaction.subscribe((val: boolean) => {

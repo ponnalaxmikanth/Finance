@@ -21,10 +21,12 @@ export class StocksComponent implements OnInit {
 
   ngOnInit() {
     this.cols = [
-      { field: 'StocksId', header: 'Stock Code' },
-      {field: 'PurchaseDate', header: 'Purchase Date' },
-      { field: 'NumbersofStocks', header: 'Quantity' },
-      { field: 'StocksPrice', header: 'Price' }
+      { field: 'Symbol', header: 'Symbol' },
+      {field: 'Date', header: 'Purchase Date' },
+      { field: 'volume', header: 'Quantity' },
+      { field: 'close', header: 'Average Price' },
+      { field: 'MarketPrice', header: 'Current Price' },
+      { field: 'dividendamount', header: 'Dividend' }
     ];
     var d = new Date();
     d.setDate(d.getDate() -365);
